@@ -27,6 +27,10 @@ namespace Library
         {
             usuario.Suspendido = false;
         } 
+        public List<Usuario> VerTodos()
+        {
+            return usuarios;
+        }
     } 
 }
         
