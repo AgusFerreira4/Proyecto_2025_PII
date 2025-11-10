@@ -23,9 +23,9 @@ namespace Library
             }
         }
 
-        public void Crear(string nombre, string apellido, string email)
+        public void Crear(string nombre, string apellido, string email, string telefono)
         {
-            Usuario nuevo = new Usuario(nombre, email, apellido, false);
+            Usuario nuevo = new Usuario(nombre, email, apellido, telefono);
             usuarios.Add(nuevo);
         }
 
