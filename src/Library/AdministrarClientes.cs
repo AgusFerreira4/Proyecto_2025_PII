@@ -17,6 +17,7 @@ namespace Library
         {
                 var cliente = new Cliente(nombres, apellidos, emails, telefonos, generos, fechanacimiento, usuarioasignados );
                 ListaClientes.Add(cliente);
+                usuarioasignados.AgregarCliente(cliente);
                 
         }
         public void EliminarCliente(Cliente cliente)
@@ -24,7 +25,7 @@ namespace Library
             ListaClientes.Remove(cliente);
         }
 
-        public void ModificarCliente(Cliente cliente, string unNombre, string unApellido, string unTelefono, string unCorreo, DateTime unaFechaNacimiento, string unGenero )
+        public void ModificarCliente(Cliente cliente, string? unNombre, string? unApellido, string? unTelefono, string? unCorreo, DateTime unaFechaNacimiento, string? unGenero )
         {
             if (cliente == null) return;
             cliente.Nombre = unNombre;
@@ -35,6 +36,16 @@ namespace Library
             cliente.FechaDeNacimiento = unaFechaNacimiento;
         }
         
+        public void ModificarCliente(Cliente cliente, string? unNombre, string? unApellido, string? unTelefono, string? unCorreo, string? unGenero )
+        {
+            if (cliente == null) return;
+            cliente.Nombre = unNombre;
+            cliente.Apellido = unApellido;
+            cliente.Telefono = unTelefono;
+            cliente.Genero = unGenero;
+            cliente.Email = unCorreo;
+        }
+        
             public void AgregarEtiquetaCliente(Cliente cliente, string etiqueta)
             {
                 if (cliente?.Etiquetas == null)
@@ -42,14 +53,7 @@ namespace Library
                 cliente.Etiquetas.Add(etiqueta);
                 
             }
-
-            public void CambiarUsuarioAsignado(Cliente cliente, Usuario nuevoVendedor)
-            {
-                if (cliente != null && nuevoVendedor != null)
-                {
-                    cliente.UsuarioAsignado = nuevoVendedor;
-                }
-            }            
+            
             public Cliente BuscarCliente(string criterio)
             {
                 if (string.IsNullOrEmpty(criterio)) return null;
