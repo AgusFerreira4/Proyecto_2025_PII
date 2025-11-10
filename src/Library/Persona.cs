@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace ClassLibrary
 {
     public abstract class Persona
@@ -7,6 +9,7 @@ namespace ClassLibrary
         public string Email { get; set; }
         
         public string Telefono{ get; set; }
+        public List<Interaccion> ListaInteracciones { get; set; }
 
         public Persona(string nombre, string apellido, string email, string telefono)
         {
@@ -14,6 +17,7 @@ namespace ClassLibrary
             Apellido = apellido;
             Email = email;
             Telefono = telefono;
+            ListaInteracciones = new List<Interaccion>();
         }
     }
 }
