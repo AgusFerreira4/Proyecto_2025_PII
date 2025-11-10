@@ -72,12 +72,6 @@ namespace Library
                 return null;
             }
             
-            public void VerPanelResumen()
-            {
-                Console.WriteLine($"Total clientes: {ListaClientes.Count}");
-            }
-            
-            
         }
 }
     

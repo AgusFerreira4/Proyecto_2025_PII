@@ -29,7 +29,7 @@ namespace ClassLibrary
             this.FechaDeNacimiento = fechaDeNacimiento;
             this.UsuarioAsignado = usuarioAsignado;
             this.Etiquetas = new List<string>();
-            this.ListaInteracciones = new List<Interaccion>();
+            
         }
 
     }

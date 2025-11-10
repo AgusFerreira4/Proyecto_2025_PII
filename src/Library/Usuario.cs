@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+
 namespace ClassLibrary
 {
     public class Usuario : Persona
@@ -155,6 +157,37 @@ namespace ClassLibrary
                     break;
                 }
             }
+        }
+
+        public void VerPanelResumen()
+        {
+            DateTime dosSemanasAdelante = DateTime.Now.AddDays(14); // Para ver las proximas reuniones de aca a 2 semanas
+            DateTime ahora = DateTime.Now;
+            List<Reuniones> proximasReuniones = new List<Reuniones>();
+            
+            Console.WriteLine($"--------------Resumen de {this.Nombre}--------------");
+            Console.WriteLine("Lista de clientes");
+            Console.WriteLine("");
+            Console.WriteLine("-----------------------------------------------------");
+            foreach (Cliente cliente in ListaClientesDeUsuario)
+            {
+                Console.WriteLine($"Cliente: {cliente.Nombre}");
+                
+            }
+            Console.WriteLine("-----------------------------------------------------");
+            Console.WriteLine("Proximas Reuniones");
+            foreach (Reuniones reunion in this.ListaInteracciones)
+            {
+                if (reunion.Fecha >= ahora && reunion.Fecha <= dosSemanasAdelante)
+                {
+                    proximasReuniones.Add(reunion);
+                }
+            }
+
+            proximasReuniones = proximasReuniones.OrderByDescending(i => i.Fecha).ToList();
+            proximasReuniones.ForEach(i => Console.WriteLine($"Programada con : {i.GetReceptor()}" +
+                                                                    $"Lugar: {i.Lugar}" +
+                                                                    $"Fecha: {i.Fecha} "));
         }
     }
     

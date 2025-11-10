@@ -22,6 +22,11 @@ namespace ClassLibrary
         {
             Nota = nota;
         }
+
+        public string GetReceptor()
+        {
+            return Receptor.Nombre;
+        }
     }    
 }
 
