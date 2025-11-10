@@ -4,16 +4,16 @@ namespace ClassLibrary
 {
     public abstract class Interaccion
     {
-        public Persona Remitente { get; set; }
-        public Persona Destinatario { get; set; }
+        public Persona Emisor { get; set; }
+        public Persona Receptor { get; set; }
         public DateTime Fecha { get; set; }
         public string Tema { get; set; }
         public string Nota { get; set; }
 
-        public Interaccion(Persona remitente, Persona destinatario, DateTime fecha, string tema)
+        public Interaccion(Persona emisor, Persona receptor, DateTime fecha, string tema)
         {
-            Remitente = remitente;
-            Destinatario = destinatario;
+            Emisor = emisor;
+            Receptor = receptor;
             Fecha = fecha;
             Tema = tema;
         }
