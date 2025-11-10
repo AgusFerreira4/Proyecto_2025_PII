@@ -38,16 +38,12 @@ namespace ClassLibrary
         public void EliminarCliente(Cliente cliente)
         {
             AdministrarClientes.Instancia.EliminarCliente(cliente);
+            this.ListaClientesDeUsuario.Remove(cliente);
         }
 
         public void ModificarCliente(Cliente cliente, string? unNombre, string? unApellido, string? unTelefono, string? unCorreo, DateTime unaFechaNacimiento, string? unGenero )
         {
             AdministrarClientes.Instancia.ModificarCliente(cliente, unNombre, unApellido, unTelefono, unCorreo, unaFechaNacimiento, unGenero);
-        }
-        
-        public void ModificarCliente(Cliente cliente, string? unNombre, string? unApellido, string? unTelefono, string? unCorreo, string? unGenero )
-        {
-            AdministrarClientes.Instancia.ModificarCliente(cliente, unNombre, unApellido, unTelefono, unCorreo, unGenero);
         }
 
         public void AgregarEtiquetaACliente(Cliente cliente, string etiqueta)

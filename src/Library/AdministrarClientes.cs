@@ -15,9 +15,10 @@ namespace Library
         }
         public void CrearCliente(string nombres, string apellidos, string telefonos, string emails, string generos, DateTime fechanacimiento, Usuario usuarioasignados )
         {
-                var cliente = new Cliente(nombres, apellidos, emails, telefonos, generos, fechanacimiento, usuarioasignados );
-                ListaClientes.Add(cliente);
-                usuarioasignados.AgregarCliente(cliente);
+            //Añadir excepción cuando el usuario está suspendido    
+            var cliente = new Cliente(nombres, apellidos, emails, telefonos, generos, fechanacimiento, usuarioasignados );
+            ListaClientes.Add(cliente);
+            usuarioasignados.AgregarCliente(cliente);
                 
         }
         public void EliminarCliente(Cliente cliente)
@@ -25,55 +26,52 @@ namespace Library
             ListaClientes.Remove(cliente);
         }
 
-        public void ModificarCliente(Cliente cliente, string? unNombre, string? unApellido, string? unTelefono, string? unCorreo, DateTime unaFechaNacimiento, string? unGenero )
+        public void ModificarCliente(Cliente cliente, string? unNombre, string? unApellido, string? unTelefono, string? unCorreo, DateTime? unaFechaNacimiento, string? unGenero )
         {
-            if (cliente == null) return;
-            cliente.Nombre = unNombre;
-            cliente.Apellido = unApellido;
-            cliente.Telefono = unTelefono;
-            cliente.Genero = unGenero;
-            cliente.Email = unCorreo;
-            cliente.FechaDeNacimiento = unaFechaNacimiento;
-        }
-        
-        public void ModificarCliente(Cliente cliente, string? unNombre, string? unApellido, string? unTelefono, string? unCorreo, string? unGenero )
-        {
-            if (cliente == null) return;
-            cliente.Nombre = unNombre;
-            cliente.Apellido = unApellido;
-            cliente.Telefono = unTelefono;
-            cliente.Genero = unGenero;
-            cliente.Email = unCorreo;
-        }
-        
-            public void AgregarEtiquetaCliente(Cliente cliente, string etiqueta)
+            //Añadir excepciones cuando el cliente es nulo o el usuario está suspendido
+            if (unNombre != null)
+                cliente.Nombre = unNombre;
+
+            if (unApellido != null)
+                cliente.Apellido = unApellido;
+
+            if (unTelefono != null)
+                cliente.Telefono = unTelefono;
+
+            if (unCorreo != null)
+                cliente.Email = unCorreo;
+
+            if (unaFechaNacimiento.HasValue)
+                cliente.FechaDeNacimiento = unaFechaNacimiento.Value;
+            if (unGenero != null)
             {
-                if (cliente?.Etiquetas == null)
-                    cliente.Etiquetas = new List<string>();
-                cliente.Etiquetas.Add(etiqueta);
-                
+                cliente.Genero = unGenero;
             }
+        }
+
+        public void AgregarEtiquetaCliente(Cliente cliente, string etiqueta)
+        {
+            //Añadir excepción en caso de no mandar un cliente o el usuario esté suspendido
+            cliente.Etiquetas.Add(etiqueta);
+                
+        }
             
-            public Cliente BuscarCliente(string criterio)
+        public Cliente BuscarCliente(string criterio)
+        {
+            if (string.IsNullOrEmpty(criterio)) return null;
+            //Esto de arriba debería de ser una excepción en caso de no dar un criterio
+            //También debe de ser una excepción si no se encuentra al cliente o si la lista de clientes está vacía
+            foreach (Cliente cliente in ListaClientes)
             {
-                if (string.IsNullOrEmpty(criterio)) return null;
-
-                foreach (var cliente in ListaClientes)
+                if (cliente.Nombre.Contains(criterio, StringComparison.OrdinalIgnoreCase) ||
+                    cliente.Apellido.Contains(criterio, StringComparison.OrdinalIgnoreCase) ||
+                    cliente.Telefono.Contains(criterio, StringComparison.OrdinalIgnoreCase) ||
+                    cliente.Email.Contains(criterio, StringComparison.OrdinalIgnoreCase))
                 {
-                    string nombre = cliente.Nombre ?? "";
-                    string apellido = cliente.Apellido ?? "";
-                    string email = cliente.Email ?? "";
-                    string telefono = cliente.Telefono ?? "";
-
-                    if (nombre.ToLower().Contains(criterio.ToLower()) ||
-                        apellido.ToLower().Contains(criterio.ToLower()) ||
-                        email.ToLower().Contains(criterio.ToLower()) ||
-                        telefono.Contains(criterio))
-                    {
                         return cliente;
-                    }
                 }
-                return null;
+            }
+            return null;
             }
             
         }
