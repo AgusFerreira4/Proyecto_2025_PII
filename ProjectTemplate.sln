@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{BE2270FE-A
 	ProjectSection(SolutionItems) = preProject
 		docs\Doxify = docs\Doxify
 		docs\User stories.md = docs\User stories.md
+		docs\ProyectoUML.drawio.svg = docs\ProyectoUML.drawio.svg
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4609408A-2219-49AA-87F2-4A5D8B0B25F6}"
