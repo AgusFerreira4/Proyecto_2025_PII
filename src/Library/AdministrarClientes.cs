@@ -49,15 +49,6 @@ namespace Library
             }
         }
         
-        public void ModificarCliente(Cliente cliente, string? unNombre, string? unApellido, string? unTelefono, string? unCorreo, string? unGenero )
-        {
-            if (cliente == null) return;
-            cliente.Nombre = unNombre;
-            cliente.Apellido = unApellido;
-            cliente.Telefono = unTelefono;
-            cliente.Genero = unGenero;
-            cliente.Email = unCorreo;
-        }
         
             public void AgregarEtiquetaCliente(Cliente cliente, string etiqueta)
             {
