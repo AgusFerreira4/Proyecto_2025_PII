@@ -10,8 +10,8 @@ namespace Library
             string nombre,
             string email,
             string apellido,
-            bool suspendido
-        ) : base(nombre, email, apellido, suspendido)
+            string telefono
+        ) : base(nombre, email, apellido, telefono)
         {
         
         }
@@ -21,10 +21,11 @@ namespace Library
         (
             string nombreUsuario,
             string emailUsuario,
-            string apellidoUsuario
+            string apellidoUsuario,
+            string unTelefono
                 )
         {
-            AdministrarUsuarios.Instancia.Crear(nombreUsuario, emailUsuario, apellidoUsuario);
+            AdministrarUsuarios.Instancia.Crear(nombreUsuario, emailUsuario, apellidoUsuario, unTelefono);
         }
 
         public void EliminarUsuario(Usuario unUsuario)
