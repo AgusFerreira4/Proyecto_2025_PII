@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Library;
 
 namespace ClassLibrary
 {
@@ -27,16 +28,53 @@ namespace ClassLibrary
 
         }
 
+
+        public void CrearCliente(string nombre, string apellido, string email, string telefono, string genero,
+            DateTime fechaDeNacimiento, Usuario usuarioAsignado)
+        {
+            AdministrarClientes.Instancia.CrearCliente(nombre, apellido, telefono, email, genero, fechaDeNacimiento, usuarioAsignado);
+        }
+
+        public void EliminarCliente(Cliente cliente)
+        {
+            AdministrarClientes.Instancia.EliminarCliente(cliente);
+        }
+
+        public void ModificarCliente(Cliente cliente, string? unNombre, string? unApellido, string? unTelefono, string? unCorreo, DateTime unaFechaNacimiento, string? unGenero )
+        {
+            AdministrarClientes.Instancia.ModificarCliente(cliente, unNombre, unApellido, unTelefono, unCorreo, unaFechaNacimiento, unGenero);
+        }
+        
+        public void ModificarCliente(Cliente cliente, string? unNombre, string? unApellido, string? unTelefono, string? unCorreo, string? unGenero )
+        {
+            AdministrarClientes.Instancia.ModificarCliente(cliente, unNombre, unApellido, unTelefono, unCorreo, unGenero);
+        }
+
+        public void AgregarEtiquetaACliente(Cliente cliente, string etiqueta)
+        {
+            AdministrarClientes.Instancia.AgregarEtiquetaCliente(cliente, etiqueta);
+        }
+
+        public void BuscarCliente(string criterio)
+        {
+            AdministrarClientes.Instancia.BuscarCliente(criterio);
+        }
+
+        public void AgregarInteraccion(Cliente cliente, Interaccion interaccion)
+        {
+            //cambiando singleto de administrarinteracciones para poder hacerlo
+        }
+
+        public void AgregarCliente(Cliente cliente)
+        {
+            this.ListaClientesDeUsuario.Add(cliente);
+        }
+
         public List<Cliente> VerClientes()
         {
-            List<Cliente> clientes = new List<Cliente>();
-            foreach (Cliente cliente in ListaClientesDeUsuario)
-            {
-                clientes.Add(cliente);
-            }
-
-            return clientes;
+            return ListaClientesDeUsuario;
         }
+        
 
         public List<Interaccion> VerInteraccionesCliente(Cliente cliente)
         {
@@ -62,7 +100,7 @@ namespace ClassLibrary
 
             return interacciones;
         }
-
+        
         public List<Interaccion> VerInteraccionesCliente(Cliente cliente, DateTime fecha)
         {
             List<Interaccion> interacciones = new List<Interaccion>();
@@ -138,12 +176,11 @@ namespace ClassLibrary
             DateTime fechaLimite, string descripcion)
         {
             Cotizacion cotizacion = new Cotizacion(total, fecha, fechaLimite, descripcion);
+            this.ListaCotizaciones.Add(cotizacion);
         }
 
-        public void RegistrarVenta(Dictionary<Producto, int> productos, double total, DateTime fecha, Cliente cliente,
-            Usuario usuario)
+        public void RegistrarVenta(Venta venta)
         {
-            Venta venta = new Venta(productos, total, fecha, cliente, usuario);
             ListaVentas.Add(venta);
         }
 
