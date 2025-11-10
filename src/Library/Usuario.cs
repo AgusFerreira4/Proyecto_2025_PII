@@ -11,7 +11,7 @@ namespace ClassLibrary
         public List<Cliente> ListaClientesDeUsuario { get; set; }
         public List<Venta> ListaVentas { get; set; }
         public List<Cotizacion> ListaCotizaciones { get; set; }
-        
+
 
         public Usuario(
             string nombre,
@@ -32,7 +32,8 @@ namespace ClassLibrary
         public void CrearCliente(string nombre, string apellido, string email, string telefono, string genero,
             DateTime fechaDeNacimiento, Usuario usuarioAsignado)
         {
-            AdministrarClientes.Instancia.CrearCliente(nombre, apellido, telefono, email, genero, fechaDeNacimiento, usuarioAsignado);
+            AdministrarClientes.Instancia.CrearCliente(nombre, apellido, telefono, email, genero, fechaDeNacimiento,
+                usuarioAsignado);
         }
 
         public void EliminarCliente(Cliente cliente)
@@ -41,9 +42,11 @@ namespace ClassLibrary
             this.ListaClientesDeUsuario.Remove(cliente);
         }
 
-        public void ModificarCliente(Cliente cliente, string? unNombre, string? unApellido, string? unTelefono, string? unCorreo, DateTime unaFechaNacimiento, string? unGenero )
+        public void ModificarCliente(Cliente cliente, string? unNombre, string? unApellido, string? unTelefono,
+            string? unCorreo, DateTime unaFechaNacimiento, string? unGenero)
         {
-            AdministrarClientes.Instancia.ModificarCliente(cliente, unNombre, unApellido, unTelefono, unCorreo, unaFechaNacimiento, unGenero);
+            AdministrarClientes.Instancia.ModificarCliente(cliente, unNombre, unApellido, unTelefono, unCorreo,
+                unaFechaNacimiento, unGenero);
         }
 
         public void AgregarEtiquetaACliente(Cliente cliente, string etiqueta)
@@ -70,74 +73,126 @@ namespace ClassLibrary
         {
             return ListaClientesDeUsuario;
         }
-        
+
 
         public List<Interaccion> VerInteraccionesCliente(Cliente cliente)
         {
             List<Interaccion> interacciones = new List<Interaccion>();
             foreach (Interaccion i in cliente.ListaInteracciones)
             {
-                interacciones.Add(i);
-            }
-
-            return interacciones;
-        }
-
-        public List<Interaccion> VerInteraccionesCliente(Cliente cliente, string tipo)
-        {
-            List<Interaccion> interacciones = new List<Interaccion>();
-            foreach (Interaccion i in cliente.ListaInteracciones)
-            {
-                if (i.GetType().Name == tipo)
+                if (i.Emisor == cliente || i.Receptor == cliente)
                 {
                     interacciones.Add(i);
                 }
             }
 
             return interacciones;
+        }
+
+        public List<Interaccion> VerInteraccionesCliente(Cliente cliente, string? tipo = null, DateTime? fecha = null)
+        {
+            List<Interaccion> interaccionesFiltradas = new List<Interaccion>();
+
+            // Diccionario para mapear palabras clave a los tipos de clase
+            Dictionary<string, string> mapaTipos = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                { "mensaje", "Mensaje" }, { "mensajes", "Mensaje" },
+                { "llamada", "Llamada" }, { "llamadas", "Llamada" },
+                { "reunion", "Reunion" }, { "reuniones", "Reunion" },
+                { "mail", "Email" }, { "mails", "Email" },
+                { "correo", "Email" }, { "correos", "Email" }
+            };
+
+            foreach (Interaccion interaccion in cliente.ListaInteracciones)
+            {
+                bool coincideParticipacion = interaccion.Emisor == cliente || interaccion.Receptor == cliente;
+                bool coincideTipo = true;
+                bool coincideFecha = true;
+
+                // Filtrar por tipo (si se especificó)
+                if (!string.IsNullOrEmpty(tipo))
+                {
+                    // Se normaliza el tipo recibido
+                    if (mapaTipos.TryGetValue(tipo.ToLower(), out string tipoNormalizado))
+                    {
+                        coincideTipo = string.Equals(interaccion.GetType().Name, tipoNormalizado,
+                            StringComparison.OrdinalIgnoreCase);
+                    }
+                    else
+                    {
+                        // Si el tipo ingresado no está en el diccionario, no coincide con nada
+                        coincideTipo = false;
+                    }
+                }
+
+                // Filtrar por fecha (si se especificó)
+                if (fecha.HasValue)
+                {
+                    coincideFecha = interaccion.Fecha.Date == fecha.Value.Date;
+                }
+
+                if (coincideParticipacion && coincideTipo && coincideFecha)
+                {
+                    interaccionesFiltradas.Add(interaccion);
+                }
+            }
+
+            return interaccionesFiltradas;
         }
         
-        public List<Interaccion> VerInteraccionesCliente(Cliente cliente, DateTime fecha)
-        {
-            List<Interaccion> interacciones = new List<Interaccion>();
-            foreach (Interaccion i in cliente.ListaInteracciones)
-            {
-                if (i.Fecha == fecha)
-                {
-                    interacciones.Add(i);
-                }
-            }
-
-            return interacciones;
-        }
-
-        public List<Interaccion> VerInteraccionesCliente(Cliente cliente, DateTime fecha, string tipo)
-        {
-            List<Interaccion> interacciones = new List<Interaccion>();
-            foreach (Interaccion i in cliente.ListaInteracciones)
-            {
-                if (i.GetType().Name == tipo && i.Fecha == fecha)
-                {
-                    interacciones.Add(i);
-                }
-            }
-
-            return interacciones;
-        }
 
         public List<Cliente> VerClientesConPocaInteraccion()
         {
-            List<Cliente> clientesPocaInteraccion = new List<Cliente>();
+            // Lista auxiliar para guardar cada cliente con su última interacción
+            List<(Cliente cliente, DateTime ultimaFecha)> clientesConFechas = new List<(Cliente, DateTime)>();
+
             foreach (Cliente cliente in ListaClientesDeUsuario)
             {
-                if (cliente.ListaInteracciones.Count <= 5)
+                DateTime ultimaFecha = DateTime.MinValue;
+
+                // Si el cliente tiene interacciones, buscamos la más reciente
+                if (cliente.ListaInteracciones.Count > 0)
                 {
-                    clientesPocaInteraccion.Add(cliente);
+                    foreach (Interaccion interaccion in cliente.ListaInteracciones)
+                    {
+                        if (interaccion.Fecha > ultimaFecha)
+                        {
+                            ultimaFecha = interaccion.Fecha;
+                        }
+                    }
                 }
+
+                // Guardamos el cliente junto con su última fecha
+                clientesConFechas.Add((cliente, ultimaFecha));
             }
 
-            return clientesPocaInteraccion;
+            // Ordenamos los clientes según la última interacción (más antigua primero)
+            for (int i = 0; i < clientesConFechas.Count - 1; i++)
+            {
+                for (int j = i + 1; j < clientesConFechas.Count; j++)
+                {
+                    if (clientesConFechas[i].ultimaFecha > clientesConFechas[j].ultimaFecha)
+                    {
+                        (Cliente,DateTime) temp = clientesConFechas[i];
+                        clientesConFechas[i] = clientesConFechas[j];
+                        clientesConFechas[j] = temp;
+                    }
+                }
+            }
+            
+
+            // Tomamos los primeros 5 (o menos si hay pocos)
+            List<Cliente> resultado = new List<Cliente>();
+            int limite = Math.Min(5, clientesConFechas.Count);
+
+            for (int i = 0; i < limite; i++)
+            {
+                resultado.Add(clientesConFechas[i].cliente);
+            }
+
+            return resultado;
         }
+
 
 
         public List<Cliente> VerClientesEnVisto()
