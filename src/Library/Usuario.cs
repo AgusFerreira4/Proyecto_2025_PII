@@ -8,7 +8,7 @@ namespace ClassLibrary
         public List<Cliente> ListaClientesDeUsuario { get; set; }
         public List<Venta> ListaVentas { get; set; }
         public List<Cotizacion> ListaCotizaciones { get; set; }
-        public List<Interaccion> ListaInteracciones { get; set; }
+        
 
         public Usuario(
             string nombre,
@@ -22,7 +22,6 @@ namespace ClassLibrary
             ListaClientesDeUsuario = new List<Cliente>();
             ListaVentas = new List<Venta>();
             ListaCotizaciones = new List<Cotizacion>();
-            ListaInteracciones = new List<Interaccion>();
 
         }
 
@@ -40,7 +39,7 @@ namespace ClassLibrary
         public List<Interaccion> VerInteraccionesCliente(Cliente cliente)
         {
             List<Interaccion> interacciones = new List<Interaccion>();
-            foreach (Interaccion i in cliente.ListaInteraccion)
+            foreach (Interaccion i in cliente.ListaInteracciones)
             {
                 interacciones.Add(i);
             }
@@ -51,7 +50,7 @@ namespace ClassLibrary
         public List<Interaccion> VerInteraccionesCliente(Cliente cliente, string tipo)
         {
             List<Interaccion> interacciones = new List<Interaccion>();
-            foreach (Interaccion i in cliente.ListaInteraccion)
+            foreach (Interaccion i in cliente.ListaInteracciones)
             {
                 if (i.GetType().Name == tipo)
                 {
@@ -65,7 +64,7 @@ namespace ClassLibrary
         public List<Interaccion> VerInteraccionesCliente(Cliente cliente, DateTime fecha)
         {
             List<Interaccion> interacciones = new List<Interaccion>();
-            foreach (Interaccion i in cliente.ListaInteraccion)
+            foreach (Interaccion i in cliente.ListaInteracciones)
             {
                 if (i.Fecha == fecha)
                 {
@@ -79,7 +78,7 @@ namespace ClassLibrary
         public List<Interaccion> VerInteraccionesCliente(Cliente cliente, DateTime fecha, string tipo)
         {
             List<Interaccion> interacciones = new List<Interaccion>();
-            foreach (Interaccion i in cliente.ListaInteraccion)
+            foreach (Interaccion i in cliente.ListaInteracciones)
             {
                 if (i.GetType().Name == tipo && i.Fecha == fecha)
                 {
@@ -95,7 +94,7 @@ namespace ClassLibrary
             List<Cliente> clientesPocaInteraccion = new List<Cliente>();
             foreach (Cliente cliente in ListaClientesDeUsuario)
             {
-                if (cliente.ListaInteraccion.Count <= 5)
+                if (cliente.ListaInteracciones.Count <= 5)
                 {
                     clientesPocaInteraccion.Add(cliente);
                 }

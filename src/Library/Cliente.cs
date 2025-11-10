@@ -18,7 +18,7 @@ namespace ClassLibrary
         public DateTime FechaDeNacimiento { get; set; }
         public List<string> Etiquetas { get; set; }
         public Usuario UsuarioAsignado { get; set; }
-        public List<Interaccion> ListaInteraccion { get; set; }
+        
 
         public Cliente(string nombre, string apellido, string email, string telefono, string genero,
             DateTime fechaDeNacimiento, Usuario usuarioAsignado)
@@ -29,7 +29,7 @@ namespace ClassLibrary
             this.FechaDeNacimiento = fechaDeNacimiento;
             this.UsuarioAsignado = usuarioAsignado;
             this.Etiquetas = new List<string>();
-            this.ListaInteraccion = new List<Interaccion>();
+            this.ListaInteracciones = new List<Interaccion>();
         }
 
     }
