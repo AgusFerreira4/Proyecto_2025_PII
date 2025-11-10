@@ -5,7 +5,23 @@ namespace Library
 {
     public class AdministrarUsuarios
     {
-        private static List<Usuario> usuarios = new List<Usuario>();
+        private static AdministrarUsuarios _instancia;
+        private  List<Usuario> usuarios = new List<Usuario>();
+        
+        private AdministrarUsuarios() {}
+
+
+        public static AdministrarUsuarios Instancia
+        {
+            get
+            {
+                if (_instancia == null)
+                {
+                    _instancia = new AdministrarUsuarios();
+                }
+                return _instancia;
+            }
+        }
 
         public void Crear(string nombre, string apellido, string email)
         {
