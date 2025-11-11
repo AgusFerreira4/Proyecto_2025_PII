@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using ClassLibrary;
 
@@ -26,14 +27,74 @@ namespace Library
         {
             ListaInteracciones.Add(unaInteraccion);
         }
-        public List<Interaccion> VerInteraccionesCliente()
+        public List<Interaccion> VerInteraccionesCliente(Cliente cliente)
         {
-            return ListaInteracciones;
+            List<Interaccion> interacciones = new List<Interaccion>();
+            foreach (Interaccion i in cliente.ListaInteracciones)
+            {
+                if (i.Emisor == cliente || i.Receptor == cliente)
+                {
+                    interacciones.Add(i);
+                }
+            }
+
+            return interacciones;
+        }
+                public List<Interaccion> VerInteraccionesCliente(Cliente cliente, string? tipo = null, DateTime? fecha = null)
+        {
+            List<Interaccion> interaccionesFiltradas = new List<Interaccion>();
+
+            // Diccionario para mapear palabras clave a los tipos de clase
+            Dictionary<string, string> mapaTipos = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                { "mensaje", "Mensaje" }, { "mensajes", "Mensaje" },
+                { "llamada", "Llamada" }, { "llamadas", "Llamada" },
+                { "reunion", "Reunion" }, { "reuniones", "Reunion" },
+                { "mail", "Email" }, { "mails", "Email" },
+                { "correo", "Email" }, { "correos", "Email" }
+            };
+
+            foreach (Interaccion interaccion in cliente.ListaInteracciones)
+            {
+                bool coincideParticipacion = interaccion.Emisor == cliente || interaccion.Receptor == cliente;
+                bool coincideTipo = true;
+                bool coincideFecha = true;
+
+                // Filtrar por tipo (si se especificó)
+                if (!string.IsNullOrEmpty(tipo))
+                {
+                    // Se normaliza el tipo recibido
+                    if (mapaTipos.TryGetValue(tipo.ToLower(), out string tipoNormalizado))
+                    {
+                        coincideTipo = string.Equals(interaccion.GetType().Name, tipoNormalizado,
+                            StringComparison.OrdinalIgnoreCase);
+                    }
+                    else
+                    {
+                        // Si el tipo ingresado no está en el diccionario, no coincide con nada
+                        coincideTipo = false;
+                    }
+                }
+
+                // Filtrar por fecha (si se especificó)
+                if (fecha.HasValue)
+                {
+                    coincideFecha = interaccion.Fecha.Date == fecha.Value.Date;
+                }
+
+                if (coincideParticipacion && coincideTipo && coincideFecha)
+                {
+                    interaccionesFiltradas.Add(interaccion);
+                }
+            }
+
+            return interaccionesFiltradas;
         }
 
-        public void EliminarInteraccion(Interaccion interaccion)
+        public void EliminarInteraccion(Interaccion interaccion, Cliente cliente)
         {
             ListaInteracciones.Remove(interaccion);
+            cliente.ListaInteracciones.Remove(interaccion);
         }
         
         public void AgregarNota(Interaccion unaInteraccion, string nota)

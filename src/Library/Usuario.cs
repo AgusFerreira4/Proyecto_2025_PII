@@ -61,7 +61,8 @@ namespace ClassLibrary
 
         public void AgregarInteraccion(Cliente cliente, Interaccion interaccion)
         {
-            //cambiando singleto de administrarinteracciones para poder hacerlo
+            AdministrarInteracciones.Instancia.AgregarInteraccion(cliente, interaccion);
+            this.ListaInteracciones.Add(interaccion);
         }
 
         public void AgregarCliente(Cliente cliente)
@@ -77,67 +78,23 @@ namespace ClassLibrary
 
         public List<Interaccion> VerInteraccionesCliente(Cliente cliente)
         {
-            List<Interaccion> interacciones = new List<Interaccion>();
-            foreach (Interaccion i in cliente.ListaInteracciones)
-            {
-                if (i.Emisor == cliente || i.Receptor == cliente)
-                {
-                    interacciones.Add(i);
-                }
-            }
-
-            return interacciones;
+            return AdministrarInteracciones.Instancia.VerInteraccionesCliente(cliente);
         }
 
         public List<Interaccion> VerInteraccionesCliente(Cliente cliente, string? tipo = null, DateTime? fecha = null)
         {
-            List<Interaccion> interaccionesFiltradas = new List<Interaccion>();
+            return AdministrarInteracciones.Instancia.VerInteraccionesCliente(cliente, tipo, fecha);
+        }
 
-            // Diccionario para mapear palabras clave a los tipos de clase
-            Dictionary<string, string> mapaTipos = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "mensaje", "Mensaje" }, { "mensajes", "Mensaje" },
-                { "llamada", "Llamada" }, { "llamadas", "Llamada" },
-                { "reunion", "Reunion" }, { "reuniones", "Reunion" },
-                { "mail", "Email" }, { "mails", "Email" },
-                { "correo", "Email" }, { "correos", "Email" }
-            };
+        public void EliminarInteraccion(Interaccion interaccion, Cliente cliente)
+        {
+            AdministrarInteracciones.Instancia.EliminarInteraccion(interaccion, cliente);
+            this.ListaInteracciones.Remove(interaccion);
+        }
 
-            foreach (Interaccion interaccion in cliente.ListaInteracciones)
-            {
-                bool coincideParticipacion = interaccion.Emisor == cliente || interaccion.Receptor == cliente;
-                bool coincideTipo = true;
-                bool coincideFecha = true;
-
-                // Filtrar por tipo (si se especificó)
-                if (!string.IsNullOrEmpty(tipo))
-                {
-                    // Se normaliza el tipo recibido
-                    if (mapaTipos.TryGetValue(tipo.ToLower(), out string tipoNormalizado))
-                    {
-                        coincideTipo = string.Equals(interaccion.GetType().Name, tipoNormalizado,
-                            StringComparison.OrdinalIgnoreCase);
-                    }
-                    else
-                    {
-                        // Si el tipo ingresado no está en el diccionario, no coincide con nada
-                        coincideTipo = false;
-                    }
-                }
-
-                // Filtrar por fecha (si se especificó)
-                if (fecha.HasValue)
-                {
-                    coincideFecha = interaccion.Fecha.Date == fecha.Value.Date;
-                }
-
-                if (coincideParticipacion && coincideTipo && coincideFecha)
-                {
-                    interaccionesFiltradas.Add(interaccion);
-                }
-            }
-
-            return interaccionesFiltradas;
+        public void AgregarNota(Interaccion interaccion, string nota)
+        {
+            AdministrarInteracciones.Instancia.AgregarNota(interaccion, nota);
         }
         
 
@@ -244,6 +201,17 @@ namespace ClassLibrary
             this.ListaCotizaciones.Add(cotizacion);
         }
 
+        public Venta crearVenta(Vendedor vendedor, Cliente cliente, Dictionary<Producto, int> productosCantidad, DateTime fecha)
+        {
+            Venta venta = new Venta(productosCantidad, 0, fecha, cliente, vendedor);
+            RegistrarVenta(venta);
+            return venta;
+        }
+
+        public List<Venta> ObtenerVentas()
+        {
+            return ListaVentas;
+        }
         public void RegistrarVenta(Venta venta)
         {
             ListaVentas.Add(venta);
