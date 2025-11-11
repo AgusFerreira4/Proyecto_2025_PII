@@ -30,9 +30,18 @@ public class GestorVentas
 
     public Venta crearVenta(Vendedor vendedor, Cliente cliente, Dictionary<Producto, int> productosCantidad, DateTime fecha)
     {
-        Venta venta = new Venta(productosCantidad, 0, fecha, cliente, vendedor);
-        ventas.Add(venta);
-        return venta;
+        try
+        {
+            Venta venta = new Venta(productosCantidad, 0, fecha, cliente, vendedor);
+            ventas.Add(venta);
+            return venta;
+        }
+        catch (NullReferenceException e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        
     }
 
     public List<Venta> ObtenerVentas()

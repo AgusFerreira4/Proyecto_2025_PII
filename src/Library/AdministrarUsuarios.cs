@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using ClassLibrary;
 
@@ -25,23 +26,56 @@ namespace Library
 
         public void Crear(string nombre, string apellido, string email, string telefono)
         {
+            try
+            {
             Usuario nuevo = new Usuario(nombre, email, apellido, telefono);
             usuarios.Add(nuevo);
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"Error al crear usuario: {ex.Message}");
+                throw;
+            }
         }
 
         public void EliminarUsuario(Usuario usuario)
         {
-            usuarios.Remove(usuario);
+            try
+            {
+                usuarios.Remove(usuario);
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public void SuspenderUsuario(Usuario usuario)
         {
-            usuario.Suspendido = true;
+            try
+            {
+                usuario.Suspendido = true;
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public void RehabilitarUsuario(Usuario usuario)
         {
-            usuario.Suspendido = false;
+            try
+            {
+                usuario.Suspendido = false;
+
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         } 
         public List<Usuario> VerTodos()
         {
