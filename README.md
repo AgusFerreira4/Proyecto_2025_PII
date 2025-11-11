@@ -15,3 +15,14 @@ Por otro lado el proyecto tiene una propuesta muy buena y muy interesante para e
 Lo positivo que le puedo sacar a eso, es que es un desafio total, ya que tenes que ingeniartelas para que el dia de mañana puedas resolver siutaciones similares, el poder ser creativos dentro de lo que se podia y desarrollar nuestra solucion a nuestro modo es una muy buena experiencia, pero aun asi siento que fue demasiada ambiguedad.
 
 Algo que use mucho para poder entender ciertos conceptos y guiarme de flujos de programas parecidos fue videos de youtube y foros de internet.
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Luciano Rodriguez:
+Regresar al equipo fue un desafío. Al ver como estaba el estado del diagrama UML tuvimos que enfrentarnos todos a rehacer el sistema para que funcione mejor con ayuda del feedback dado por los profesores. Noté como mis compañeros lograban aplicar bien los distintos patrones de diseño y guías que habíamos aprendido. Debido al parcial de Matemática Discreta, no le dimos el tiempo que merecía el proyecto, pero en poco tiempo se pudo obtener un gran resultado respecto al sistma de clases. 
+
+Lograr ver cómo lo aprendido en clase es aplicado en un contexto real me ha servido de mucho para entender cómo usarlo. Estoy más acostumbrado a que lo que aprendo no se use mucho en lo cotidiano que esta es de las primeraas veces que digo que lo que aprendí en clase me va a servir para el futuro. Quizás noté que los patrones de diseño son entregados muy a último momento, como menciona Agustín. Siento que respecto a las clases, nos dieron todas las herramientas para poder trabajar pero que nos faltan más ejercicios prácticos para poder mejorar. Un equilibrio entre lo teórico y lo práctico es lo que me gustaría ver en esta materia, para que no suceda que a la hora de encarar un proyecto grande se pueda tener mayor facilidad de organización y comprensión de un sistema de manera más practica.
+
+Respecto al proyecto mismo, está bueno, aunque hubieron cosas que fueron ambiguas, como que la clase Usuario era instanciable tambíen, que no se especificaron de antemano y que seguramente le afectó a muchos grupos además del nuestro. 
+
+Supongo que no fue un desafío dificil por falta de herramientas, sino más bien a veces puede llegar a complicarse por falta de experiencia, al menos eso creo yo.
