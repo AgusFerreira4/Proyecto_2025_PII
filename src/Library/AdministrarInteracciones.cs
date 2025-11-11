@@ -7,8 +7,21 @@ namespace Library
     public class AdministrarInteracciones
     {
         private List<Interaccion> ListaInteracciones = new List<Interaccion>();
-        private AdministrarClientes instancia = AdministrarClientes.Instancia;
         private static AdministrarInteracciones _instancia;
+        
+        private AdministrarInteracciones() {}
+
+        public static AdministrarInteracciones Instancia
+        {
+            get
+            {
+                if (_instancia == null)
+                {
+                    _instancia = new AdministrarInteracciones();
+                }
+                return _instancia;
+            }
+        }
         public void AgregarInteraccion(Cliente unCliente, Interaccion unaInteraccion)
         {
             ListaInteracciones.Add(unaInteraccion);
