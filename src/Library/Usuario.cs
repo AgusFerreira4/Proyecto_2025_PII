@@ -200,7 +200,7 @@ namespace ClassLibrary
             List<Cliente> clientesVistos = new List<Cliente>();
 
             // Primero actualizamos el estado de las interacciones globales
-            AdministrarInteracciones._instancia.ActualizarInteraccionesRespondidas();
+            // Para modificar AdministrarInteracciones._instancia.ActualizarInteraccionesRespondidas();
 
             // Luego revisamos los clientes asignados al usuario
             foreach (Cliente cliente in ListaClientesDeUsuario)
