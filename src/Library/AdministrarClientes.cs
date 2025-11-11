@@ -16,14 +16,29 @@ namespace Library
         public void CrearCliente(string nombres, string apellidos, string telefonos, string emails, string generos, DateTime fechanacimiento, Usuario usuarioasignados )
         {
             //Añadir excepción cuando el usuario está suspendido    
+            try
+            {
             var cliente = new Cliente(nombres, apellidos, emails, telefonos, generos, fechanacimiento, usuarioasignados );
             ListaClientes.Add(cliente);
             usuarioasignados.AgregarCliente(cliente);
-                
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"Error al crear usuario: {ex.Message}");
+                throw;
+            }   
         }
         public void EliminarCliente(Cliente cliente)
         {
-            ListaClientes.Remove(cliente);
+            try
+            {
+                ListaClientes.Remove(cliente);
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public void ModificarCliente(Cliente cliente, string? unNombre, string? unApellido, string? unTelefono, string? unCorreo, DateTime? unaFechaNacimiento, string? unGenero )
