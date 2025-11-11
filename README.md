@@ -26,3 +26,14 @@ Lograr ver cómo lo aprendido en clase es aplicado en un contexto real me ha ser
 Respecto al proyecto mismo, está bueno, aunque hubieron cosas que fueron ambiguas, como que la clase Usuario era instanciable tambíen, que no se especificaron de antemano y que seguramente le afectó a muchos grupos además del nuestro. 
 
 Supongo que no fue un desafío dificil por falta de herramientas, sino más bien a veces puede llegar a complicarse por falta de experiencia, al menos eso creo yo.
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Gastón Gardil:
+Desde mi perspectiva, el proyecto es una forma muy eficaz de ir aplicando lo que vemos en clase y así ir incorporándolo de verdad.  
+
+Lo más complicado para mí fue arrancar el UML desde cero: entender cómo tenía que funcionar cada cosa y qué lógica implementar. Al principio era todo muy abstracto, pero a medida que el diagrama iba tomando forma y empezamos a codear, todo se fue haciendo más claro y un poco más ameno.  
+
+Me gustó mucho trabajar con mis compañeros. Fue una excelente forma de aprender a comunicarnos en equipo, dividir tareas, coordinar horarios y resolver problemas juntos.  
+
+En conclusión, gracias al proyecto estoy consolidando un montón de conceptos que damos en clase, me está enseñando a pensar de manera más estructurada para resolver conflictos y creo que logramos una comunicación súper eficiente dentro del grupo.
