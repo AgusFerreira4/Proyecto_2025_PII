@@ -18,6 +18,7 @@ namespace Library
         {
             this.ListaClientesDeUsuario.Remove(cliente);
             vendedorNuevo.ListaClientesDeUsuario.Add(cliente);
+            cliente.UsuarioAsignado = vendedorNuevo;
         }
     }
 }

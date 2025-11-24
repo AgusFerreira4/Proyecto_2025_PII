@@ -101,7 +101,7 @@ namespace Library
         {
             user.EliminarInteraccion(interaccion, cliente);
         }
-
+    
         public void AgregarNota(Interaccion interaccion, string nota)
         {
             user.AgregarNota(interaccion, nota);
@@ -176,10 +176,10 @@ namespace Library
             admin.ReahnilitarUsuario(unUsuario);
         }
 
-        public void adne(Cliente cliente, Vendedor vendedor)
+        public void adne(Cliente cliente, Vendedor vendedor, Vendedor vendedorNuevo)
         {
             vendedor = VerificarVendedor(user);
-            vendedor.CambiarVendedorAsignado(cliente, vendedor);
+            vendedor.CambiarVendedorAsignado(cliente, vendedorNuevo);
         }
     }
 }

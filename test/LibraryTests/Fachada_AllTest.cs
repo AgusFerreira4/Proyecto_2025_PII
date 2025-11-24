@@ -61,7 +61,7 @@ namespace Tests
         [Test]
         public void Instancia_NoNull_Y_SetUsuario_SeAcepta()
         {
-            Assert.IsNotNull(Fachada.Instancia);
+            Assert.That(Fachada.Instancia != null);
             var u = CrearUsuarioNormal("u1");
             Assert.DoesNotThrow(() => fachada.SetUsuario(u));
         }
@@ -74,17 +74,17 @@ namespace Tests
             fachada.SetUsuario(user);
 
             // Antes: lista vacía
-            Assert.AreEqual(0, user.VerClientes().Count);
+            Assert.That(user.VerClientes().Count == 0);
 
             // Crear cliente via fachada
             fachada.CrearCliente("Ana", "Gomez", "a@g.com", "123", "F", DateTime.Now, user);
 
             // Ahora debe haber 1 cliente en lista del usuario y también en AdministrarClientes
-            Assert.AreEqual(1, user.VerClientes().Count);
+            Assert.That(user.VerClientes().Count == 1);
 
             var primero = user.VerClientes()[0];
-            Assert.AreEqual("Ana", primero.Nombre);
-            Assert.AreEqual("Gomez", primero.Apellido);
+            Assert.That("Ana" == primero.Nombre);
+            Assert.That("Gomez" == primero.Apellido);
         }
 
         [Test]
@@ -98,12 +98,12 @@ namespace Tests
             var cliente = user.VerClientes()[0];
 
             // Confirmación precondición
-            Assert.AreEqual(1, user.VerClientes().Count);
+            Assert.That(1 == user.VerClientes().Count);
 
             // Eliminar por fachada
             fachada.EliminarCliente(cliente);
 
-            Assert.AreEqual(0, user.VerClientes().Count);
+            Assert.That(0 == user.VerClientes().Count);
         }
 
         [Test]
@@ -118,8 +118,8 @@ namespace Tests
             // Modificar nombre y telefono
             fachada.ModificarCliente(cliente, "Nuevo", null, "999", null, cliente.FechaDeNacimiento, null);
 
-            Assert.AreEqual("Nuevo", cliente.Nombre);
-            Assert.AreEqual("999", cliente.Telefono);
+            Assert.That("Nuevo" == cliente.Nombre);
+            Assert.That("999" == cliente.Telefono);
         }
 
         [Test]
@@ -132,7 +132,7 @@ namespace Tests
             var cliente = user.VerClientes()[0];
 
             fachada.AgregarEtiquetaACliente(cliente, "VIP");
-            Assert.Contains("VIP", cliente.Etiquetas);
+            Assert.That(cliente.Etiquetas, Does.Contain("VIP"));
         }
 
         [Test]
@@ -146,8 +146,8 @@ namespace Tests
             // Buscar por nombre: el método de fachada delega a user.BuscarCliente que a su vez llama a AdministrarClientes.BuscarCliente
             // La fachada no devuelve el cliente sino que user.BuscarCliente hace la búsqueda internamente; sin embargo, AdministrarClientes.BuscarCliente devuelve el cliente.
             var resultado = AdministrarClientes.Instancia.BuscarCliente("Buscado");
-            Assert.IsNotNull(resultado);
-            Assert.AreEqual("Buscado", resultado.Nombre);
+            Assert.That(resultado != null);
+            Assert.That("Buscado" == resultado.Nombre);
         }
 
         // ---------------- Interacciones ----------------
@@ -171,9 +171,9 @@ namespace Tests
             cliente.ListaInteracciones.Add(inter);
 
             var lista2 = fachada.VerInteraccionesCliente(cliente);
-            Assert.IsNotNull(lista2);
-            Assert.IsTrue(lista2.Count >= 1);
-            Assert.AreEqual("Tema1", lista2[0].Tema);
+            Assert.That(lista2 != null);
+            Assert.That(lista2.Count,Is.GreaterThanOrEqualTo(1));
+            Assert.That("Tema1" == lista2[0].Tema);
         }
 
         [Test]
@@ -193,14 +193,14 @@ namespace Tests
 
             // Filtrar por fecha 2023-01-01
             var filtradasFecha = AdministrarInteracciones.Instancia.VerInteraccionesCliente(cliente, null, new DateTime(2023,1,1));
-            Assert.IsNotNull(filtradasFecha);
-            Assert.AreEqual(1, filtradasFecha.Count);
+            Assert.That(filtradasFecha != null);
+            Assert.That(1 == filtradasFecha.Count);
 
             // Filtrar por tipo - usando nombre de clase (TestInteraccion no está en map; mapa espera tipos como "Mensaje","Llamada", etc.)
             // Si pedimos tipo inexistente debe devolver 0
             var filtradasTipo = AdministrarInteracciones.Instancia.VerInteraccionesCliente(cliente, "mensaje", null);
-            Assert.IsNotNull(filtradasTipo);
-            Assert.AreEqual(0, filtradasTipo.Count);
+            Assert.That(filtradasTipo != null);
+            Assert.That(0 == filtradasTipo.Count);
         }
 
         [Test]
@@ -217,11 +217,11 @@ namespace Tests
             // Añadir también a AdministrarInteracciones lista interna mediante su método
             AdministrarInteracciones.Instancia.AgregarInteraccion(cliente, inter);
 
-            Assert.IsTrue(cliente.ListaInteracciones.Contains(inter));
+            Assert.That(cliente.ListaInteracciones, Does.Contain(inter));
 
             fachada.EliminarInteraccion(inter, cliente);
 
-            Assert.IsFalse(cliente.ListaInteracciones.Contains(inter));
+            Assert.That(cliente.ListaInteracciones, Does.Not.Contain(inter));
         }
 
         [Test]
@@ -238,7 +238,7 @@ namespace Tests
 
             fachada.AgregarNota(inter, "Nota1");
             // AdministrarInteracciones.AgregarNota usa AddNota, que fija la propiedad Nota.
-            Assert.AreEqual("Nota1", inter.Nota);
+            Assert.That("Nota1" == inter.Nota);
         }
 
         // ---------------- Cotizaciones ----------------
@@ -248,12 +248,12 @@ namespace Tests
             var user = CrearUsuarioNormal("u10");
             fachada.SetUsuario(user);
 
-            Assert.AreEqual(0, user.ListaCotizaciones.Count);
+            Assert.That(0 == user.ListaCotizaciones.Count);
 
             fachada.RegistrarCotizacion(1500.5, DateTime.Today, DateTime.Today.AddDays(7), "Promo");
 
-            Assert.AreEqual(1, user.ListaCotizaciones.Count);
-            Assert.AreEqual(1500.5, user.ListaCotizaciones[0].Total);
+            Assert.That(1 == user.ListaCotizaciones.Count);
+            Assert.That(1500.5 == user.ListaCotizaciones[0].Total);
         }
 
         // ---------------- Ventas ----------------
@@ -272,10 +272,10 @@ namespace Tests
 
             var venta = fachada.CrearVenta(vendedor, cliente, dict, DateTime.Now);
 
-            Assert.IsNotNull(venta);
+            Assert.That(venta != null);
             // CrearVenta en Usuario llama RegistrarVenta internamente -> ListaVentas debe contener la venta
-            Assert.AreEqual(1, user.ObtenerVentas().Count);
-            Assert.AreSame(venta, user.ObtenerVentas()[0]);
+            Assert.That(1 == user.ObtenerVentas().Count);
+            Assert.That(venta == user.ObtenerVentas()[0]);
         }
 
         [Test]
@@ -287,7 +287,7 @@ namespace Tests
             var venta = new Venta(new Dictionary<Producto,int>(), 0, DateTime.Now, null, user);
             fachada.RegistrarVenta(venta);
 
-            Assert.AreEqual(1, user.ObtenerVentas().Count);
+            Assert.That(1 == user.ObtenerVentas().Count);
         }
 
         [Test]
@@ -306,8 +306,8 @@ namespace Tests
             user.RegistrarVenta(v2);
 
             var res = fachada.VerVentasPorPeriodo(new DateTime(2023,1,1), new DateTime(2023,1,31));
-            Assert.AreEqual(1, res.Count);
-            Assert.AreSame(v1, res[0]);
+            Assert.That(1 == res.Count);
+            Assert.That(v1 == res[0]);
         }
 
         // ---------------- ObtenerVentas ----------------
@@ -321,8 +321,8 @@ namespace Tests
             user.RegistrarVenta(v);
 
             var listado = fachada.ObtenerVentas();
-            Assert.IsNotNull(listado);
-            Assert.AreEqual(1, listado.Count);
+            Assert.That(listado != null);
+            Assert.That(1 == listado.Count);
         }
 
         // ---------------- AgregarNotaAInteraccion ----------------
@@ -341,7 +341,7 @@ namespace Tests
 
             fachada.AgregarNotaAInteraccion(inter, "NotaX");
             // Usuario.AgregarNotaAInteraccion busca en ListaInteracciones y fija Nota
-            Assert.AreEqual("NotaX", inter.Nota);
+            Assert.That("NotaX" == inter.Nota);
         }
 
         // ---------------- VerPanelResumen (simple: no exception) ----------------
@@ -365,14 +365,14 @@ namespace Tests
             fachada.SetUsuario(admin);
 
             // AdministrarUsuarios está vacío inicialmente
-            Assert.AreEqual(0, AdministrarUsuarios.Instancia.VerTodos().Count);
+            Assert.That(0 == AdministrarUsuarios.Instancia.VerTodos().Count);
 
             // Crear usuario a través de fachada (delegará a Administrador.CrearUsuario -> AdministrarUsuarios)
             fachada.CrearUsuario("Marcos", "m@mail", "Ape", "222");
 
-            Assert.AreEqual(1, AdministrarUsuarios.Instancia.VerTodos().Count);
+            Assert.That(1 == AdministrarUsuarios.Instancia.VerTodos().Count);
             var creado = AdministrarUsuarios.Instancia.VerTodos()[0];
-            Assert.AreEqual("Marcos", creado.Nombre);
+            Assert.That("Marcos" == creado.Nombre);
         }
 
         [Test]
@@ -396,11 +396,11 @@ namespace Tests
 
             // Suspender
             fachada.SuspenderUsuario(target);
-            Assert.IsTrue(target.Suspendido);
+            Assert.That(target.Suspendido == true);
 
             // Rehabilitar
             fachada.RehabilitarUsuario(target);
-            Assert.IsFalse(target.Suspendido);
+            Assert.That(target.Suspendido == false);
         }
 
         [Test]
@@ -411,13 +411,13 @@ namespace Tests
 
             AdministrarUsuarios.Instancia.Crear("A","B","c@c.com","11");
             var lista = AdministrarUsuarios.Instancia.VerTodos();
-            Assert.AreEqual(1, lista.Count);
+            Assert.That(1 == lista.Count);
 
             // Obtener referencia al usuario creado
             var creado = lista[0];
             fachada.EliminarUsuario(creado);
 
-            Assert.AreEqual(0, AdministrarUsuarios.Instancia.VerTodos().Count);
+            Assert.That(0 == AdministrarUsuarios.Instancia.VerTodos().Count);
         }
 
         // ---------------- Asignar cliente a otro vendedor (adne) ----------------
@@ -436,19 +436,19 @@ namespace Tests
 
             Assert.Throws<PermisoDenegadoException>(() =>
             {
-                fachada.adne(cli, vend2);
+                fachada.adne(cli, vend1, vend2);
             });
 
             // Ahora que la fachada tiene un vendedor como user, la reasignación debe funcionar
             fachada.SetUsuario(vend1);
             Assert.DoesNotThrow(() =>
             {
-                fachada.adne(cli, vend2);
+                fachada.adne(cli, vend1, vend2);
             });
 
             // cliente debe estar en vend2.ListaClientesDeUsuario (después del cambio)
-            Assert.IsTrue(vend2.ListaClientesDeUsuario.Contains(cli));
-            Assert.IsFalse(vend1.ListaClientesDeUsuario.Contains(cli));
+            Assert.That(vend2.ListaClientesDeUsuario, Does.Contain(cli));
+            Assert.That(vend1.ListaClientesDeUsuario, Does.Not.Contain(cli));
         }
 
         private Vendedor CreateAndAddVendedorToUsers(string name)
@@ -479,9 +479,9 @@ namespace Tests
 
             var resultado = fachada.VerClientesConPocaInteraccion();
             // Debe devolver solo los 5 con fecha más antigua (según la implementación)
-            Assert.AreEqual(5, resultado.Count);
+            Assert.That(5 == resultado.Count);
             // El primero debería ser el más antiguo (i=5)
-            Assert.AreEqual("Cli5", resultado[0].Nombre);
+            Assert.That("Cli5" == resultado[0].Nombre);
         }
     }
 }
