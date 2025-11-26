@@ -42,5 +42,6 @@ namespace Library
         {
             AdministrarUsuarios.Instancia.RehabilitarUsuario(unUsuario);
         }
+        
     }
 }

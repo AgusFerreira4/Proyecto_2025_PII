@@ -14,10 +14,11 @@ namespace Library
         
         }
 
-        public void CamviarVendedorAsignado(Cliente cliente, Vendedor vendedorNuevo)
+        public void CambiarVendedorAsignado(Cliente cliente, Vendedor vendedorNuevo)
         {
             this.ListaClientesDeUsuario.Remove(cliente);
             vendedorNuevo.ListaClientesDeUsuario.Add(cliente);
+            cliente.UsuarioAsignado = vendedorNuevo;
         }
     }
 }
