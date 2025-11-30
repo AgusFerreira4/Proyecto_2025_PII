@@ -109,7 +109,7 @@ namespace Library
         public void AgregarNota(Interaccion unaInteraccion, string nota)
         {
             ArgumentNullException.ThrowIfNull(unaInteraccion);
-            if (string.IsNullOrEmpty(nota))
+            if (!string.IsNullOrEmpty(nota))
             {
                 unaInteraccion.AddNota(nota);
             } 

@@ -213,8 +213,6 @@ namespace Tests
             user.AgregarCliente(cliente);
 
             var inter = new TestInteraccion(cliente, cliente, DateTime.Now, "Tema");
-            cliente.ListaInteracciones.Add(inter);
-            // Añadir también a AdministrarInteracciones lista interna mediante su método
             AdministrarInteracciones.Instancia.AgregarInteraccion(cliente, inter);
 
             Assert.That(cliente.ListaInteracciones, Does.Contain(inter));
