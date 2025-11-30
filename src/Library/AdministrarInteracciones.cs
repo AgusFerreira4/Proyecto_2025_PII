@@ -22,11 +22,14 @@ namespace Library
                 }
                 return _instancia;
             }
-        }
-        public void AgregarInteraccion(Cliente unCliente, Interaccion unaInteraccion)
+        }public void AgregarInteraccion(Cliente unCliente, Interaccion unaInteraccion)
         {
+            ArgumentNullException.ThrowIfNull(unCliente);
+            ArgumentNullException.ThrowIfNull(unaInteraccion);
             ListaInteracciones.Add(unaInteraccion);
+            unCliente.ListaInteracciones.Add(unaInteraccion);
         }
+
         public List<Interaccion> VerInteraccionesCliente(Cliente cliente)
         {
             List<Interaccion> interacciones = new List<Interaccion>();
@@ -93,15 +96,24 @@ namespace Library
 
         public void EliminarInteraccion(Interaccion interaccion, Cliente cliente)
         {
-            ListaInteracciones.Remove(interaccion);
-            cliente.ListaInteracciones.Remove(interaccion);
+           ArgumentNullException.ThrowIfNull(cliente);
+           ArgumentNullException.ThrowIfNull(interaccion);
+            bool existeGlobal = ListaInteracciones.Remove(interaccion);
+            bool existeCliente = cliente.ListaInteracciones.Remove(interaccion);
+
+            if (!existeGlobal && !existeCliente)
+                throw new KeyNotFoundException("La interacción no existe y no se puede eliminar.");
         }
+
         
         public void AgregarNota(Interaccion unaInteraccion, string nota)
         {
-            unaInteraccion.AddNota(nota);
+            ArgumentNullException.ThrowIfNull(unaInteraccion);
+            if (!string.IsNullOrEmpty(nota))
+            {
+                unaInteraccion.AddNota(nota);
+            } 
         }
-        
         public void ActualizarInteraccionesRespondidas()
         {
             // Filtramos solo las interacciones que implementan IRespondible
@@ -127,9 +139,28 @@ namespace Library
                 }
             }
         }
-        public void AgregarLlamada() { }
-        public void AgregarReunion() { }
-        public void AgregarEmails() { }
-        public void AgregarMensajes() { }
+
+        public void AgregarLlamada()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AgregarReunion()
+        {
+            throw new NotImplementedException();
+
+        }
+
+        public void AgregarEmails()
+        {
+            throw new NotImplementedException();
+
+        }
+
+        public void AgregarMensajes()
+        {
+            throw new NotImplementedException();
+
+        }
     }
 }

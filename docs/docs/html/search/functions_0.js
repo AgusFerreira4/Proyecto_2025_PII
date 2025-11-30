@@ -1,0 +1,18 @@
+var searchData=
+[
+  ['addnota_0',['AddNota',['../class_class_library_1_1_interaccion.html#a49adfb04c88ec33ee6a026fea1f2bc3d',1,'ClassLibrary::Interaccion']]],
+  ['administrador_1',['Administrador',['../class_library_1_1_administrador.html#aaf55d46d3e2fef1926d343b0c1f5276d',1,'Library::Administrador']]],
+  ['administrarclientes_2',['AdministrarClientes',['../class_library_1_1_administrar_clientes.html#abe0bafe7f4b186e71a6ea7577a372c73',1,'Library::AdministrarClientes']]],
+  ['administrarinteracciones_3',['AdministrarInteracciones',['../class_library_1_1_administrar_interacciones.html#a5d7a3a49991f92a66682f59242734c81',1,'Library::AdministrarInteracciones']]],
+  ['administrarusuarios_4',['AdministrarUsuarios',['../class_library_1_1_administrar_usuarios.html#aec8b431bdedd0a5078f4d5c0418824cd',1,'Library::AdministrarUsuarios']]],
+  ['adne_5fasignaclienteanuevovendedor_5frequierevendedorenfachada_5',['adne_AsignaClienteANuevoVendedor_RequiereVendedorEnFachada',['../class_tests_1_1_fachada_all_tests.html#ab779bdb65be1027066d432338a0757e1',1,'Tests::FachadaAllTests']]],
+  ['agregarcliente_6',['AgregarCliente',['../class_class_library_1_1_usuario.html#adf575cf6231caafad640dbfc87d8104c',1,'ClassLibrary::Usuario']]],
+  ['agregaretiquetaacliente_7',['AgregarEtiquetaACliente',['../class_class_library_1_1_usuario.html#a6207c52407583876e7a741f04bde533d',1,'ClassLibrary::Usuario']]],
+  ['agregaretiquetaacliente_5fagregaetiqueta_8',['AgregarEtiquetaACliente_AgregaEtiqueta',['../class_tests_1_1_fachada_all_tests.html#a025c635536b553361f1f28ed65a7c9ea',1,'Tests::FachadaAllTests']]],
+  ['agregarinteraccion_9',['AgregarInteraccion',['../class_class_library_1_1_usuario.html#afefe550622dd8e23b7e510fe7a7663e2',1,'ClassLibrary::Usuario']]],
+  ['agregarinteraccion_5fy_5fverinteraccionescliente_5ffuncionan_10',['AgregarInteraccion_Y_VerInteraccionesCliente_Funcionan',['../class_tests_1_1_fachada_all_tests.html#ae35353af0f1dd9f1cacfe5c934f1e7fd',1,'Tests::FachadaAllTests']]],
+  ['agregarnota_11',['AgregarNota',['../class_class_library_1_1_usuario.html#a0aa617c54af59a104817bd7d8252563f',1,'ClassLibrary::Usuario']]],
+  ['agregarnota_5fasignanotaeninteraccion_12',['AgregarNota_AsignaNotaEnInteraccion',['../class_tests_1_1_fachada_all_tests.html#a53a833f8b1279e809c1193879b5d7295',1,'Tests::FachadaAllTests']]],
+  ['agregarnotaainteraccion_13',['AgregarNotaAInteraccion',['../class_class_library_1_1_usuario.html#a40b58e32539d359262b826fbbe641b26',1,'ClassLibrary::Usuario']]],
+  ['agregarnotaainteraccion_5fmodificanotaeninteraccion_14',['AgregarNotaAInteraccion_ModificaNotaEnInteraccion',['../class_tests_1_1_fachada_all_tests.html#a52f0bb4ab74ba826be12c38a9d3d1b95',1,'Tests::FachadaAllTests']]]
+];

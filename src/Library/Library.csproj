@@ -4,6 +4,10 @@
     <LangVersion>8</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
+  <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  <NoWarn>1591</NoWarn>
+</PropertyGroup>
+  <PropertyGroup>
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>

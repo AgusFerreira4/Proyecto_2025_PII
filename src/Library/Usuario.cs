@@ -203,7 +203,7 @@ namespace ClassLibrary
 
         public Venta crearVenta(Vendedor vendedor, Cliente cliente, Dictionary<Producto, int> productosCantidad, DateTime fecha)
         {
-            Venta venta = new Venta(productosCantidad, 0, fecha, cliente, vendedor);
+            Venta venta = new Venta(productosCantidad, fecha, cliente, vendedor);
             RegistrarVenta(venta);
             return venta;
         }

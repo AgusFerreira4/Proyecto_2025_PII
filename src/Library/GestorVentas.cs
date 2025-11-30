@@ -32,7 +32,7 @@ public class GestorVentas
     {
         try
         {
-            Venta venta = new Venta(productosCantidad, 0, fecha, cliente, vendedor);
+            Venta venta = new Venta(productosCantidad, fecha, cliente, vendedor);
             ventas.Add(venta);
             return venta;
         }

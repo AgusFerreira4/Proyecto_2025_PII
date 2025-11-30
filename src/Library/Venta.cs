@@ -25,11 +25,10 @@ namespace ClassLibrary
         public Cliente ClienteComprador { get; set; }
         public Usuario UsuarioVendedor { get; set; }
 
-        public Venta(Dictionary<Producto, int> productosCantidad, double total, DateTime fecha, Cliente clienteComprador,
+        public Venta(Dictionary<Producto, int> productosCantidad, DateTime fecha, Cliente clienteComprador,
             Usuario usuarioVendedor)
         {
             ProductosCantidad = productosCantidad;
-            Total = total;
             Fecha = fecha;
             ClienteComprador = clienteComprador;
             UsuarioVendedor = usuarioVendedor;

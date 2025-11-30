@@ -12,7 +12,7 @@ namespace ClassLibrary
     /// <summary>
     /// Esta clase representa un tren muy básico.
     /// </summary>
-    public class Train
+    public class Train//
     {
         /// <summary>
         /// Obtiene un valor que indica si las maquinas del tren han sido encendidas o no.

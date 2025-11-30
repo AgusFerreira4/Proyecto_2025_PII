@@ -53,29 +53,14 @@ namespace Library
 
         public void SuspenderUsuario(Usuario usuario)
         {
-            try
-            {
-                usuario.Suspendido = true;
-            }
-            catch (ArgumentNullException e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            ArgumentNullException.ThrowIfNull(usuario);
+            usuario.Suspendido = true;
         }
 
         public void RehabilitarUsuario(Usuario usuario)
         {
-            try
-            {
-                usuario.Suspendido = false;
-
-            }
-            catch (ArgumentNullException e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            ArgumentNullException.ThrowIfNull(usuario);
+            usuario.Suspendido = false;
         } 
         public List<Usuario> VerTodos()
         {

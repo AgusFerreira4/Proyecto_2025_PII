@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['cambiarvendedorasignado_0',['CambiarVendedorAsignado',['../class_library_1_1_vendedor.html#a648fe2741ce964008e9b33cf6553c48c',1,'Library::Vendedor']]],
+  ['classlibrary_1',['ClassLibrary',['../namespace_class_library.html',1,'']]],
+  ['cliente_2',['Cliente',['../class_class_library_1_1_cliente.html',1,'ClassLibrary::Cliente'],['../class_class_library_1_1_cliente.html#a0ecaac600982f966906fc11cae6c57ba',1,'ClassLibrary::Cliente::Cliente()']]],
+  ['cliente_2ecs_3',['Cliente.cs',['../_cliente_8cs.html',1,'']]],
+  ['consoleapplication_4',['ConsoleApplication',['../namespace_console_application.html',1,'']]],
+  ['contenido_5',['Contenido',['../class_class_library_1_1_emails.html#a093ea2614dc3e87aa7df8a1d7d53d294',1,'ClassLibrary::Emails::Contenido'],['../class_class_library_1_1_mensajes.html#a9ab3661076a067b3c446e91757ef0d35',1,'ClassLibrary::Mensajes::Contenido']]],
+  ['cotizacion_6',['Cotizacion',['../class_class_library_1_1_cotizacion.html',1,'ClassLibrary::Cotizacion'],['../class_class_library_1_1_cotizacion.html#ab7db332aa2289f6cd3cf92b016017016',1,'ClassLibrary::Cotizacion::Cotizacion()']]],
+  ['cotizacion_2ecs_7',['Cotizacion.cs',['../_cotizacion_8cs.html',1,'']]],
+  ['crearadministrador_8',['CrearAdministrador',['../class_tests_1_1_fachada_all_tests.html#a1cb1d368a1e68b68834ac39a5b141536',1,'Tests::FachadaAllTests']]],
+  ['crearcliente_9',['CrearCliente',['../class_class_library_1_1_usuario.html#ab3a40da3bd5ed8c58a607c7c0b93b45e',1,'ClassLibrary::Usuario']]],
+  ['crearcliente_5fagregaclienteausuarioyadminclientes_10',['CrearCliente_AgregaClienteAUsuarioYAdminClientes',['../class_tests_1_1_fachada_all_tests.html#a60e8785752488cb4fc5865937942575c',1,'Tests::FachadaAllTests']]],
+  ['crearclientesimple_11',['CrearClienteSimple',['../class_tests_1_1_fachada_all_tests.html#a95c0ca3dc59185b6df6d2227ed66e8a5',1,'Tests::FachadaAllTests']]],
+  ['crearproducto_12',['CrearProducto',['../class_tests_1_1_fachada_all_tests.html#ac7aa26e84d85c38cdaca1a4ed0c2acbb',1,'Tests::FachadaAllTests']]],
+  ['crearusuario_13',['CrearUsuario',['../class_library_1_1_administrador.html#a1d3525ec355406b0213dff6866b75717',1,'Library::Administrador']]],
+  ['crearusuario_5fnoadmin_5flanzapermisodenegado_14',['CrearUsuario_NoAdmin_LanzaPermisoDenegado',['../class_tests_1_1_fachada_all_tests.html#ab8e2f7fce119ff4355c513514105f311',1,'Tests::FachadaAllTests']]],
+  ['crearusuario_5fsoloadmin_5fpermisoyoperacion_15',['CrearUsuario_SoloAdmin_PermisoYOperacion',['../class_tests_1_1_fachada_all_tests.html#ae3bf9d9ca2feed65b9de389ad602d4f4',1,'Tests::FachadaAllTests']]],
+  ['crearusuarionormal_16',['CrearUsuarioNormal',['../class_tests_1_1_fachada_all_tests.html#ad04eba259a0aae3797594de478f963fe',1,'Tests::FachadaAllTests']]],
+  ['crearvendedor_17',['CrearVendedor',['../class_tests_1_1_fachada_all_tests.html#a92de4d2e292a83dcf8e8558f0390ec04',1,'Tests::FachadaAllTests']]],
+  ['crearventa_18',['crearVenta',['../class_class_library_1_1_usuario.html#a075173270cf7e81106ea0ca2cded9790',1,'ClassLibrary::Usuario']]],
+  ['crearventa_5fregistraydevuelveventa_19',['CrearVenta_RegistraYDevuelveVenta',['../class_tests_1_1_fachada_all_tests.html#ae0e5ba2b7a21dd2d12637ce60f704519',1,'Tests::FachadaAllTests']]],
+  ['createandaddvendedortousers_20',['CreateAndAddVendedorToUsers',['../class_tests_1_1_fachada_all_tests.html#a985c4e6ac3874c9577f8607ef12442ce',1,'Tests::FachadaAllTests']]]
+];

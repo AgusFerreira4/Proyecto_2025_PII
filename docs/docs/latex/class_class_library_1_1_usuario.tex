@@ -1,0 +1,271 @@
+\doxysection{Referencia de la clase Class\+Library\+::Usuario}
+\hypertarget{class_class_library_1_1_usuario}{}\label{class_class_library_1_1_usuario}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+Diagrama de herencia de Class\+Library\+::Usuario\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_class_library_1_1_usuario}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_class_library_1_1_usuario_a1fd1fc59cc4c9d6b0807ecf0cedbe2bc}{Usuario}} (string nombre, string email, string apellido, string telefono)
+\item 
+void \mbox{\hyperlink{class_class_library_1_1_usuario_ab3a40da3bd5ed8c58a607c7c0b93b45e}{Crear\+Cliente}} (string nombre, string apellido, string email, string telefono, string genero, Date\+Time fecha\+De\+Nacimiento, \mbox{\hyperlink{class_class_library_1_1_usuario_a1fd1fc59cc4c9d6b0807ecf0cedbe2bc}{Usuario}} usuario\+Asignado)
+\item 
+void \mbox{\hyperlink{class_class_library_1_1_usuario_a96358a04ffd748106c04930fc63d68ba}{Eliminar\+Cliente}} (\mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}} cliente)
+\item 
+void \mbox{\hyperlink{class_class_library_1_1_usuario_afec9518522b5e000206a0567b8c40fd1}{Modificar\+Cliente}} (\mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}} cliente, string? un\+Nombre, string? un\+Apellido, string? un\+Telefono, string? un\+Correo, Date\+Time una\+Fecha\+Nacimiento, string? un\+Genero)
+\item 
+void \mbox{\hyperlink{class_class_library_1_1_usuario_a6207c52407583876e7a741f04bde533d}{Agregar\+Etiqueta\+ACliente}} (\mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}} cliente, string etiqueta)
+\item 
+void \mbox{\hyperlink{class_class_library_1_1_usuario_a3a021120a4876ad9f9e59f8fb91813a0}{Buscar\+Cliente}} (string criterio)
+\item 
+void \mbox{\hyperlink{class_class_library_1_1_usuario_afefe550622dd8e23b7e510fe7a7663e2}{Agregar\+Interaccion}} (\mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}} cliente, Interaccion interaccion)
+\item 
+void \mbox{\hyperlink{class_class_library_1_1_usuario_adf575cf6231caafad640dbfc87d8104c}{Agregar\+Cliente}} (\mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}} cliente)
+\item 
+List$<$ \mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}} $>$ \mbox{\hyperlink{class_class_library_1_1_usuario_ac5cb67264e015003f4cbda5e43f57fd0}{Ver\+Clientes}} ()
+\item 
+List$<$ Interaccion $>$ \mbox{\hyperlink{class_class_library_1_1_usuario_a3743fc37cc238a342f2c7910dc072bb9}{Ver\+Interacciones\+Cliente}} (\mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}} cliente)
+\item 
+List$<$ Interaccion $>$ \mbox{\hyperlink{class_class_library_1_1_usuario_af0301c7171bace5f87d093fa1f084590}{Ver\+Interacciones\+Cliente}} (\mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}} cliente, string? tipo=null, Date\+Time? fecha=null)
+\item 
+void \mbox{\hyperlink{class_class_library_1_1_usuario_af2a9ccae0e3116185529198da20f24b6}{Eliminar\+Interaccion}} (Interaccion interaccion, \mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}} cliente)
+\item 
+void \mbox{\hyperlink{class_class_library_1_1_usuario_a0aa617c54af59a104817bd7d8252563f}{Agregar\+Nota}} (Interaccion interaccion, string nota)
+\item 
+List$<$ \mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}} $>$ \mbox{\hyperlink{class_class_library_1_1_usuario_ac87d75fcb6b9ea7d9a29c316c491ad13}{Ver\+Clientes\+Con\+Poca\+Interaccion}} ()
+\item 
+List$<$ \mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}} $>$ \mbox{\hyperlink{class_class_library_1_1_usuario_a3ed3a3958760cf74ab880d32bd710384}{Ver\+Clientes\+En\+Visto}} ()
+\item 
+List$<$ \mbox{\hyperlink{class_class_library_1_1_venta}{Venta}} $>$ \mbox{\hyperlink{class_class_library_1_1_usuario_aa1296f45d9b49e2f49ca33aaeff62de9}{Ver\+Ventas\+Por\+Periodo}} (Date\+Time fechaini, Date\+Time fechafin)
+\item 
+void \mbox{\hyperlink{class_class_library_1_1_usuario_a234bcdc48ab2a0dc937c600f0dccc170}{Registrar\+Cotizacion}} (double total, Date\+Time fecha, Date\+Time fecha\+Limite, string descripcion)
+\item 
+\mbox{\hyperlink{class_class_library_1_1_venta}{Venta}} \mbox{\hyperlink{class_class_library_1_1_usuario_a075173270cf7e81106ea0ca2cded9790}{crear\+Venta}} (Vendedor vendedor, \mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}} cliente, Dictionary$<$ \mbox{\hyperlink{class_class_library_1_1_producto}{Producto}}, int $>$ productos\+Cantidad, Date\+Time fecha)
+\item 
+List$<$ \mbox{\hyperlink{class_class_library_1_1_venta}{Venta}} $>$ \mbox{\hyperlink{class_class_library_1_1_usuario_a906360cfe9bc4538c77ee226141ccb93}{Obtener\+Ventas}} ()
+\item 
+void \mbox{\hyperlink{class_class_library_1_1_usuario_ae6dd7b084616187da3586df4eeae4082}{Registrar\+Venta}} (\mbox{\hyperlink{class_class_library_1_1_venta}{Venta}} venta)
+\item 
+void \mbox{\hyperlink{class_class_library_1_1_usuario_a40b58e32539d359262b826fbbe641b26}{Agregar\+Nota\+AInteraccion}} (Interaccion interaccion, string nota)
+\item 
+void \mbox{\hyperlink{class_class_library_1_1_usuario_aab7e0ae47cf23c37e5de368f7af56751}{Ver\+Panel\+Resumen}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos públicos}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_class_library_1_1_usuario_a6034bd1ba8cc405f015aa07de5d6874d}{Suspendido}} \{ get
+\item 
+\mbox{\hyperlink{class_class_library_1_1_usuario_a120e2e0057e23733bf7e4f66d7e0222c}{set}}
+\item 
+List$<$ \mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}} $>$ \mbox{\hyperlink{class_class_library_1_1_usuario_a8ab02010a134709f0ddde7eab366c579}{Lista\+Clientes\+De\+Usuario}} \{ get
+\item 
+List$<$ \mbox{\hyperlink{class_class_library_1_1_venta}{Venta}} $>$ \mbox{\hyperlink{class_class_library_1_1_usuario_a3f9c16c1bd9693c9afb808d9d817f752}{Lista\+Ventas}} \{ get
+\item 
+List$<$ \mbox{\hyperlink{class_class_library_1_1_cotizacion}{Cotizacion}} $>$ \mbox{\hyperlink{class_class_library_1_1_usuario_a353105637debf9d884647488d12fcad1}{Lista\+Cotizaciones}} \{ get
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Otros miembros heredados}
+\doxysubsection*{Métodos privados heredados de \mbox{\hyperlink{class_class_library_1_1_persona}{Class\+Library\+::\+Persona}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_class_library_1_1_persona_a891f9147c53493b7aa63cdfe26675f4d}{Persona}} (string nombre, string apellido, string email, string telefono)
+\end{DoxyCompactItemize}
+\doxysubsection*{Atributos privados heredados de \mbox{\hyperlink{class_class_library_1_1_persona}{Class\+Library\+::\+Persona}}}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_class_library_1_1_persona_a09c621ebf9377d5c66492636105e9cea}{Nombre}} \{ get
+\item 
+\mbox{\hyperlink{class_class_library_1_1_persona_a9552ef6ca66aaaaa20dfdb64898f8653}{set}}
+\item 
+string \mbox{\hyperlink{class_class_library_1_1_persona_a3ddd613546a2484534ce09b7aa3f07c2}{Apellido}} \{ get
+\item 
+string \mbox{\hyperlink{class_class_library_1_1_persona_aea4a983ac7c8c347210fa2a4d287dcdd}{Email}} \{ get
+\item 
+string \mbox{\hyperlink{class_class_library_1_1_persona_a210dd11ff921cf317e5c5008e8593462}{Telefono}} \{ get
+\item 
+List$<$ Interaccion $>$ \mbox{\hyperlink{class_class_library_1_1_persona_a24e71c55605386cd66151ce4cc926f95}{Lista\+Interacciones}} \{ get
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_class_library_1_1_usuario_doc-constructors}
+\doxysubsection{Documentación de constructores y destructores}
+\Hypertarget{class_class_library_1_1_usuario_a1fd1fc59cc4c9d6b0807ecf0cedbe2bc}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!Usuario@{Usuario}}
+\index{Usuario@{Usuario}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{Usuario()}{Usuario()}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_a1fd1fc59cc4c9d6b0807ecf0cedbe2bc} 
+Class\+Library\+::\+Usuario\+::\+Usuario (\begin{DoxyParamCaption}\item[{string}]{nombre}{, }\item[{string}]{email}{, }\item[{string}]{apellido}{, }\item[{string}]{telefono}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_class_library_1_1_usuario_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{class_class_library_1_1_usuario_adf575cf6231caafad640dbfc87d8104c}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!AgregarCliente@{AgregarCliente}}
+\index{AgregarCliente@{AgregarCliente}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{AgregarCliente()}{AgregarCliente()}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_adf575cf6231caafad640dbfc87d8104c} 
+void Class\+Library\+::\+Usuario\+::\+Agregar\+Cliente (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}}}]{cliente}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_class_library_1_1_usuario_a6207c52407583876e7a741f04bde533d}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!AgregarEtiquetaACliente@{AgregarEtiquetaACliente}}
+\index{AgregarEtiquetaACliente@{AgregarEtiquetaACliente}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{AgregarEtiquetaACliente()}{AgregarEtiquetaACliente()}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_a6207c52407583876e7a741f04bde533d} 
+void Class\+Library\+::\+Usuario\+::\+Agregar\+Etiqueta\+ACliente (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}}}]{cliente}{, }\item[{string}]{etiqueta}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_class_library_1_1_usuario_afefe550622dd8e23b7e510fe7a7663e2}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!AgregarInteraccion@{AgregarInteraccion}}
+\index{AgregarInteraccion@{AgregarInteraccion}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{AgregarInteraccion()}{AgregarInteraccion()}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_afefe550622dd8e23b7e510fe7a7663e2} 
+void Class\+Library\+::\+Usuario\+::\+Agregar\+Interaccion (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}}}]{cliente}{, }\item[{Interaccion}]{interaccion}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_class_library_1_1_usuario_a0aa617c54af59a104817bd7d8252563f}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!AgregarNota@{AgregarNota}}
+\index{AgregarNota@{AgregarNota}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{AgregarNota()}{AgregarNota()}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_a0aa617c54af59a104817bd7d8252563f} 
+void Class\+Library\+::\+Usuario\+::\+Agregar\+Nota (\begin{DoxyParamCaption}\item[{Interaccion}]{interaccion}{, }\item[{string}]{nota}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_class_library_1_1_usuario_a40b58e32539d359262b826fbbe641b26}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!AgregarNotaAInteraccion@{AgregarNotaAInteraccion}}
+\index{AgregarNotaAInteraccion@{AgregarNotaAInteraccion}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{AgregarNotaAInteraccion()}{AgregarNotaAInteraccion()}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_a40b58e32539d359262b826fbbe641b26} 
+void Class\+Library\+::\+Usuario\+::\+Agregar\+Nota\+AInteraccion (\begin{DoxyParamCaption}\item[{Interaccion}]{interaccion}{, }\item[{string}]{nota}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_class_library_1_1_usuario_a3a021120a4876ad9f9e59f8fb91813a0}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!BuscarCliente@{BuscarCliente}}
+\index{BuscarCliente@{BuscarCliente}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{BuscarCliente()}{BuscarCliente()}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_a3a021120a4876ad9f9e59f8fb91813a0} 
+void Class\+Library\+::\+Usuario\+::\+Buscar\+Cliente (\begin{DoxyParamCaption}\item[{string}]{criterio}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_class_library_1_1_usuario_ab3a40da3bd5ed8c58a607c7c0b93b45e}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!CrearCliente@{CrearCliente}}
+\index{CrearCliente@{CrearCliente}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{CrearCliente()}{CrearCliente()}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_ab3a40da3bd5ed8c58a607c7c0b93b45e} 
+void Class\+Library\+::\+Usuario\+::\+Crear\+Cliente (\begin{DoxyParamCaption}\item[{string}]{nombre}{, }\item[{string}]{apellido}{, }\item[{string}]{email}{, }\item[{string}]{telefono}{, }\item[{string}]{genero}{, }\item[{Date\+Time}]{fecha\+De\+Nacimiento}{, }\item[{\mbox{\hyperlink{class_class_library_1_1_usuario_a1fd1fc59cc4c9d6b0807ecf0cedbe2bc}{Usuario}}}]{usuario\+Asignado}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_class_library_1_1_usuario_a075173270cf7e81106ea0ca2cded9790}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!crearVenta@{crearVenta}}
+\index{crearVenta@{crearVenta}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{crearVenta()}{crearVenta()}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_a075173270cf7e81106ea0ca2cded9790} 
+\mbox{\hyperlink{class_class_library_1_1_venta}{Venta}} Class\+Library\+::\+Usuario\+::crear\+Venta (\begin{DoxyParamCaption}\item[{Vendedor}]{vendedor}{, }\item[{\mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}}}]{cliente}{, }\item[{Dictionary$<$ \mbox{\hyperlink{class_class_library_1_1_producto}{Producto}}, int $>$}]{productos\+Cantidad}{, }\item[{Date\+Time}]{fecha}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_class_library_1_1_usuario_a96358a04ffd748106c04930fc63d68ba}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!EliminarCliente@{EliminarCliente}}
+\index{EliminarCliente@{EliminarCliente}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{EliminarCliente()}{EliminarCliente()}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_a96358a04ffd748106c04930fc63d68ba} 
+void Class\+Library\+::\+Usuario\+::\+Eliminar\+Cliente (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}}}]{cliente}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_class_library_1_1_usuario_af2a9ccae0e3116185529198da20f24b6}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!EliminarInteraccion@{EliminarInteraccion}}
+\index{EliminarInteraccion@{EliminarInteraccion}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{EliminarInteraccion()}{EliminarInteraccion()}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_af2a9ccae0e3116185529198da20f24b6} 
+void Class\+Library\+::\+Usuario\+::\+Eliminar\+Interaccion (\begin{DoxyParamCaption}\item[{Interaccion}]{interaccion}{, }\item[{\mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}}}]{cliente}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_class_library_1_1_usuario_afec9518522b5e000206a0567b8c40fd1}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!ModificarCliente@{ModificarCliente}}
+\index{ModificarCliente@{ModificarCliente}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{ModificarCliente()}{ModificarCliente()}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_afec9518522b5e000206a0567b8c40fd1} 
+void Class\+Library\+::\+Usuario\+::\+Modificar\+Cliente (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}}}]{cliente}{, }\item[{string?}]{un\+Nombre}{, }\item[{string?}]{un\+Apellido}{, }\item[{string?}]{un\+Telefono}{, }\item[{string?}]{un\+Correo}{, }\item[{Date\+Time}]{una\+Fecha\+Nacimiento}{, }\item[{string?}]{un\+Genero}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_class_library_1_1_usuario_a906360cfe9bc4538c77ee226141ccb93}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!ObtenerVentas@{ObtenerVentas}}
+\index{ObtenerVentas@{ObtenerVentas}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{ObtenerVentas()}{ObtenerVentas()}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_a906360cfe9bc4538c77ee226141ccb93} 
+List$<$ \mbox{\hyperlink{class_class_library_1_1_venta}{Venta}} $>$ Class\+Library\+::\+Usuario\+::\+Obtener\+Ventas (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_class_library_1_1_usuario_a234bcdc48ab2a0dc937c600f0dccc170}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!RegistrarCotizacion@{RegistrarCotizacion}}
+\index{RegistrarCotizacion@{RegistrarCotizacion}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{RegistrarCotizacion()}{RegistrarCotizacion()}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_a234bcdc48ab2a0dc937c600f0dccc170} 
+void Class\+Library\+::\+Usuario\+::\+Registrar\+Cotizacion (\begin{DoxyParamCaption}\item[{double}]{total}{, }\item[{Date\+Time}]{fecha}{, }\item[{Date\+Time}]{fecha\+Limite}{, }\item[{string}]{descripcion}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_class_library_1_1_usuario_ae6dd7b084616187da3586df4eeae4082}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!RegistrarVenta@{RegistrarVenta}}
+\index{RegistrarVenta@{RegistrarVenta}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{RegistrarVenta()}{RegistrarVenta()}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_ae6dd7b084616187da3586df4eeae4082} 
+void Class\+Library\+::\+Usuario\+::\+Registrar\+Venta (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_class_library_1_1_venta}{Venta}}}]{venta}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_class_library_1_1_usuario_ac5cb67264e015003f4cbda5e43f57fd0}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!VerClientes@{VerClientes}}
+\index{VerClientes@{VerClientes}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{VerClientes()}{VerClientes()}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_ac5cb67264e015003f4cbda5e43f57fd0} 
+List$<$ \mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}} $>$ Class\+Library\+::\+Usuario\+::\+Ver\+Clientes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_class_library_1_1_usuario_ac87d75fcb6b9ea7d9a29c316c491ad13}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!VerClientesConPocaInteraccion@{VerClientesConPocaInteraccion}}
+\index{VerClientesConPocaInteraccion@{VerClientesConPocaInteraccion}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{VerClientesConPocaInteraccion()}{VerClientesConPocaInteraccion()}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_ac87d75fcb6b9ea7d9a29c316c491ad13} 
+List$<$ \mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}} $>$ Class\+Library\+::\+Usuario\+::\+Ver\+Clientes\+Con\+Poca\+Interaccion (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_class_library_1_1_usuario_a3ed3a3958760cf74ab880d32bd710384}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!VerClientesEnVisto@{VerClientesEnVisto}}
+\index{VerClientesEnVisto@{VerClientesEnVisto}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{VerClientesEnVisto()}{VerClientesEnVisto()}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_a3ed3a3958760cf74ab880d32bd710384} 
+List$<$ \mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}} $>$ Class\+Library\+::\+Usuario\+::\+Ver\+Clientes\+En\+Visto (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_class_library_1_1_usuario_a3743fc37cc238a342f2c7910dc072bb9}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!VerInteraccionesCliente@{VerInteraccionesCliente}}
+\index{VerInteraccionesCliente@{VerInteraccionesCliente}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{VerInteraccionesCliente()}{VerInteraccionesCliente()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_a3743fc37cc238a342f2c7910dc072bb9} 
+List$<$ Interaccion $>$ Class\+Library\+::\+Usuario\+::\+Ver\+Interacciones\+Cliente (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}}}]{cliente}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_class_library_1_1_usuario_af0301c7171bace5f87d093fa1f084590}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!VerInteraccionesCliente@{VerInteraccionesCliente}}
+\index{VerInteraccionesCliente@{VerInteraccionesCliente}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{VerInteraccionesCliente()}{VerInteraccionesCliente()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_af0301c7171bace5f87d093fa1f084590} 
+List$<$ Interaccion $>$ Class\+Library\+::\+Usuario\+::\+Ver\+Interacciones\+Cliente (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}}}]{cliente}{, }\item[{string?}]{tipo}{ = {\ttfamily null}, }\item[{Date\+Time?}]{fecha}{ = {\ttfamily null}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_class_library_1_1_usuario_aab7e0ae47cf23c37e5de368f7af56751}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!VerPanelResumen@{VerPanelResumen}}
+\index{VerPanelResumen@{VerPanelResumen}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{VerPanelResumen()}{VerPanelResumen()}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_aab7e0ae47cf23c37e5de368f7af56751} 
+void Class\+Library\+::\+Usuario\+::\+Ver\+Panel\+Resumen (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_class_library_1_1_usuario_aa1296f45d9b49e2f49ca33aaeff62de9}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!VerVentasPorPeriodo@{VerVentasPorPeriodo}}
+\index{VerVentasPorPeriodo@{VerVentasPorPeriodo}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{VerVentasPorPeriodo()}{VerVentasPorPeriodo()}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_aa1296f45d9b49e2f49ca33aaeff62de9} 
+List$<$ \mbox{\hyperlink{class_class_library_1_1_venta}{Venta}} $>$ Class\+Library\+::\+Usuario\+::\+Ver\+Ventas\+Por\+Periodo (\begin{DoxyParamCaption}\item[{Date\+Time}]{fechaini}{, }\item[{Date\+Time}]{fechafin}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_class_library_1_1_usuario_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{class_class_library_1_1_usuario_a8ab02010a134709f0ddde7eab366c579}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!ListaClientesDeUsuario@{ListaClientesDeUsuario}}
+\index{ListaClientesDeUsuario@{ListaClientesDeUsuario}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{ListaClientesDeUsuario}{ListaClientesDeUsuario}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_a8ab02010a134709f0ddde7eab366c579} 
+List$<$\mbox{\hyperlink{class_class_library_1_1_cliente}{Cliente}}$>$ Class\+Library\+::\+Usuario\+::\+Lista\+Clientes\+De\+Usuario \{ get}
+
+\Hypertarget{class_class_library_1_1_usuario_a353105637debf9d884647488d12fcad1}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!ListaCotizaciones@{ListaCotizaciones}}
+\index{ListaCotizaciones@{ListaCotizaciones}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{ListaCotizaciones}{ListaCotizaciones}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_a353105637debf9d884647488d12fcad1} 
+List$<$\mbox{\hyperlink{class_class_library_1_1_cotizacion}{Cotizacion}}$>$ Class\+Library\+::\+Usuario\+::\+Lista\+Cotizaciones \{ get}
+
+\Hypertarget{class_class_library_1_1_usuario_a3f9c16c1bd9693c9afb808d9d817f752}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!ListaVentas@{ListaVentas}}
+\index{ListaVentas@{ListaVentas}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{ListaVentas}{ListaVentas}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_a3f9c16c1bd9693c9afb808d9d817f752} 
+List$<$\mbox{\hyperlink{class_class_library_1_1_venta}{Venta}}$>$ Class\+Library\+::\+Usuario\+::\+Lista\+Ventas \{ get}
+
+\Hypertarget{class_class_library_1_1_usuario_a120e2e0057e23733bf7e4f66d7e0222c}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!set@{set}}
+\index{set@{set}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{set}{set}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_a120e2e0057e23733bf7e4f66d7e0222c} 
+Class\+Library\+::\+Usuario\+::set}
+
+\Hypertarget{class_class_library_1_1_usuario_a6034bd1ba8cc405f015aa07de5d6874d}\index{ClassLibrary::Usuario@{ClassLibrary::Usuario}!Suspendido@{Suspendido}}
+\index{Suspendido@{Suspendido}!ClassLibrary::Usuario@{ClassLibrary::Usuario}}
+\doxysubsubsection{\texorpdfstring{Suspendido}{Suspendido}}
+{\footnotesize\ttfamily \label{class_class_library_1_1_usuario_a6034bd1ba8cc405f015aa07de5d6874d} 
+bool Class\+Library\+::\+Usuario\+::\+Suspendido \{ get}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/ignac/\+Desktop/repos programacion 2/\+Proyecto\+\_\+2025\+\_\+\+PII/src/\+Library/\mbox{\hyperlink{_usuario_8cs}{Usuario.\+cs}}\end{DoxyCompactItemize}

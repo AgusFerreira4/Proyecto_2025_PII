@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using ClassLibrary;
+using Library.Excepciones;
 
 namespace Library
 {
@@ -15,18 +16,23 @@ namespace Library
         }
         public void CrearCliente(string nombres, string apellidos, string telefonos, string emails, string generos, DateTime fechanacimiento, Usuario usuarioasignados )
         {
-            //Añadir excepción cuando el usuario está suspendido    
             try
             {
-            var cliente = new Cliente(nombres, apellidos, emails, telefonos, generos, fechanacimiento, usuarioasignados );
-            ListaClientes.Add(cliente);
-            usuarioasignados.AgregarCliente(cliente);
+                var cliente = new Cliente(nombres, apellidos, emails, telefonos, generos, fechanacimiento,
+                    usuarioasignados);
+                ListaClientes.Add(cliente);
+                if (usuarioasignados.Suspendido)
+                {
+                    throw new SuspendedUserException("El usuario esta suspendido");
+                }
+
+                usuarioasignados.AgregarCliente(cliente);
             }
             catch (ArgumentException ex)
             {
                 Console.WriteLine($"Error al crear usuario: {ex.Message}");
                 throw;
-            }   
+            }
         }
         public void EliminarCliente(Cliente cliente)
         {
@@ -43,7 +49,6 @@ namespace Library
 
         public void ModificarCliente(Cliente cliente, string? unNombre, string? unApellido, string? unTelefono, string? unCorreo, DateTime? unaFechaNacimiento, string? unGenero )
         {
-            //Añadir excepciones cuando el cliente es nulo o el usuario está suspendido
             if (unNombre != null)
                 cliente.Nombre = unNombre;
 
@@ -66,16 +71,21 @@ namespace Library
 
         public void AgregarEtiquetaCliente(Cliente cliente, string etiqueta)
         {
-            //Añadir excepción en caso de no mandar un cliente o el usuario esté suspendido
+            if (cliente.Equals(null))
+            {
+                throw new NullReferenceException("No mando un cliente");
+            }
             cliente.Etiquetas.Add(etiqueta);
                 
         }
-            
         public Cliente BuscarCliente(string criterio)
         {
-            if (string.IsNullOrEmpty(criterio)) return null;
-            //Esto de arriba debería de ser una excepción en caso de no dar un criterio
-            //También debe de ser una excepción si no se encuentra al cliente o si la lista de clientes está vacía
+            if (string.IsNullOrWhiteSpace(criterio))
+                throw new ArgumentException("El criterio de búsqueda no puede ser nulo ni vacío.");
+
+            if (ListaClientes == null || ListaClientes.Count == 0)
+                throw new InvalidOperationException("No hay clientes cargados en el sistema.");
+
             foreach (Cliente cliente in ListaClientes)
             {
                 if (cliente.Nombre.Contains(criterio, StringComparison.OrdinalIgnoreCase) ||
@@ -83,11 +93,13 @@ namespace Library
                     cliente.Telefono.Contains(criterio, StringComparison.OrdinalIgnoreCase) ||
                     cliente.Email.Contains(criterio, StringComparison.OrdinalIgnoreCase))
                 {
-                        return cliente;
+                    return cliente;
                 }
             }
-            return null;
-            }
+
+            throw new KeyNotFoundException("No se encontró ningún cliente con ese criterio.");
+        }
+
             
         }
 }
