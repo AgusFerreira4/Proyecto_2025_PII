@@ -480,6 +480,241 @@ namespace Tests
             Assert.That(5 == resultado.Count);
             // El primero debería ser el más antiguo (i=5)
             Assert.That("Cli5" == resultado[0].Nombre);
+            
+            
+        }
+        [Test]
+        public void VerClientesEnVisto_RetornaClientesConInteraccionesRespondidas()
+        {
+            var user = CrearUsuarioNormal("u19");
+            fachada.SetUsuario(user);
+
+            // Crear clientes
+            var cliConRespuesta = CrearClienteSimple(user, "ConRespuesta");
+            var cliSinRespuesta = CrearClienteSimple(user, "SinRespuesta");
+            var cliSinInteraccion = CrearClienteSimple(user, "SinInteraccion");
+
+            user.AgregarCliente(cliConRespuesta);
+            user.AgregarCliente(cliSinRespuesta);
+            user.AgregarCliente(cliSinInteraccion);
+
+            // Para cliConRespuesta: crear un mensaje original y su respuesta
+            var mensajeOriginal = new Mensajes(user, cliConRespuesta, DateTime.Now.AddDays(-1), "Consulta", "Hola, tengo una pregunta");
+            var respuesta = new Mensajes(cliConRespuesta, user, DateTime.Now, "Respuesta", "Sí, aquí va la info");
+
+            cliConRespuesta.ListaInteracciones.Add(mensajeOriginal);
+            cliConRespuesta.ListaInteracciones.Add(respuesta);
+            AdministrarInteracciones.Instancia.AgregarInteraccion(cliConRespuesta, mensajeOriginal);
+            AdministrarInteracciones.Instancia.AgregarInteraccion(cliConRespuesta, respuesta);
+
+            // Para cliSinRespuesta: solo mensaje original sin respuesta
+            var mensajeSinRespuesta = new Mensajes(user, cliSinRespuesta, DateTime.Now, "Consulta", "Hola");
+            cliSinRespuesta.ListaInteracciones.Add(mensajeSinRespuesta);
+            AdministrarInteracciones.Instancia.AgregarInteraccion(cliSinRespuesta, mensajeSinRespuesta);
+
+            // Llamar al método que actualiza respondidos (se llama internamente en VerClientesEnVisto)
+            var resultado = fachada.VerClientesEnVisto();
+
+            Assert.That(resultado, Does.Contain(cliConRespuesta));  // Tiene respuesta
+            Assert.That(resultado, Does.Not.Contain(cliSinRespuesta));  // No tiene respuesta
+            Assert.That(resultado, Does.Not.Contain(cliSinInteraccion));  // Sin interacciones
+        }
+        [Test]
+        public void VerVentasPorPeriodo_RetornaSoloVentasDelRangoDeFechas()
+        {
+            var user = CrearUsuarioNormal("u20");
+            fachada.SetUsuario(user);
+
+            var cliente = CrearClienteSimple(user, "CliPeriodo");
+            user.AgregarCliente(cliente);
+
+            var ventaDentro = new Venta(new Dictionary<Producto,int>(), 1000, new DateTime(2025, 6, 15), cliente, user);
+            var ventaFuera1 = new Venta(new Dictionary<Producto,int>(), 2000, new DateTime(2024, 12, 31), cliente, user);
+            var ventaFuera2 = new Venta(new Dictionary<Producto,int>(), 3000, new DateTime(2025, 12, 31), cliente, user);
+
+            user.RegistrarVenta(ventaDentro);
+            user.RegistrarVenta(ventaFuera1);
+            user.RegistrarVenta(ventaFuera2);
+
+            var resultado = fachada.VerVentasPorPeriodo(new DateTime(2025, 1, 1), new DateTime(2025, 11, 30));
+
+            Assert.That(resultado.Count, Is.EqualTo(1));
+            Assert.That(resultado[0], Is.EqualTo(ventaDentro));
+        
+        }
+        [Test]
+        public void RegistrarCotizacion_AgregaCotizacionALaListaDelUsuario()
+        {
+            var user = CrearUsuarioNormal("u21");
+            fachada.SetUsuario(user);
+
+            Assert.That(user.ListaCotizaciones.Count, Is.EqualTo(0));
+
+            fachada.RegistrarCotizacion(2500.75, DateTime.Today, DateTime.Today.AddDays(15), "Cotización de prueba");
+
+            Assert.That(user.ListaCotizaciones.Count, Is.EqualTo(1));
+            Assert.That(user.ListaCotizaciones[0].Total, Is.EqualTo(2500.75));
+            Assert.That(user.ListaCotizaciones[0].Descripcion, Is.EqualTo("Cotización de prueba"));
+        }
+        [Test]
+        public void CrearVenta_CreaYRegistraVentaCorrectamente()
+        {
+            var vendedor = CrearVendedor("vendCreator");
+            var user = CrearUsuarioNormal("u22");
+            fachada.SetUsuario(user);
+
+            var cliente = CrearClienteSimple(user, "CliVenta");
+            user.AgregarCliente(cliente);
+
+            var prod = CrearProducto("prod1", 1500);
+            var productos = new Dictionary<Producto, int> { { prod, 2 } };
+
+            var venta = fachada.CrearVenta(vendedor, cliente, productos, DateTime.Today);
+
+            Assert.That(venta, Is.Not.Null);
+            Assert.That(venta.Total, Is.EqualTo(3000)); // 1500 * 2
+            Assert.That(venta.ClienteComprador, Is.EqualTo(cliente));
+            Assert.That(user.ObtenerVentas(), Does.Contain(venta));
+        }
+        [Test]
+        public void ObtenerVentas_RetornaListaCompletaDeVentasDelUsuario()
+        {
+            var user = CrearUsuarioNormal("u23");
+            fachada.SetUsuario(user);
+
+            var venta1 = new Venta(new Dictionary<Producto,int>(), 1000, DateTime.Today, null, user);
+            var venta2 = new Venta(new Dictionary<Producto,int>(), 2000, DateTime.Today.AddDays(-5), null, user);
+
+            user.RegistrarVenta(venta1);
+            user.RegistrarVenta(venta2);
+
+            var resultado = fachada.ObtenerVentas();
+
+            Assert.That(resultado.Count, Is.EqualTo(2));
+            Assert.That(resultado, Is.EquivalentTo(user.ObtenerVentas()));
+        }
+
+    
+        [Test]
+        public void RegistrarVenta_AgregaLaVentaALaListaDelUsuario()
+        {
+            var user = CrearUsuarioNormal("u24");
+            fachada.SetUsuario(user);
+
+            var venta = new Venta(new Dictionary<Producto,int>(), 5000, DateTime.Today, null, user);
+
+            Assert.That(user.ObtenerVentas().Count, Is.EqualTo(0));
+
+            fachada.RegistrarVenta(venta);
+
+            Assert.That(user.ObtenerVentas().Count, Is.EqualTo(1));
+            Assert.That(user.ObtenerVentas()[0], Is.EqualTo(venta));
+        }
+        [Test]
+        public void AgregarNotaAInteraccion_AsignaNotaCorrectamente()
+        {
+            var user = CrearUsuarioNormal("u25");
+            fachada.SetUsuario(user);
+
+            var cliente = CrearClienteSimple(user, "CliNota");
+            user.AgregarCliente(cliente);
+
+            var interaccion = new TestInteraccion(user, cliente, DateTime.Today, "Reunión");
+            cliente.ListaInteracciones.Add(interaccion);
+            user.ListaInteracciones.Add(interaccion);
+
+            Assert.That(interaccion.Nota, Is.Null.Or.Empty);
+
+            fachada.AgregarNotaAInteraccion(interaccion, "Cliente muy interesado, hacer seguimiento");
+
+            Assert.That(interaccion.Nota, Is.EqualTo("Cliente muy interesado, hacer seguimiento"));
+        }
+        [Test]
+        public void CrearUsuario()
+        {
+            var admin = CrearAdministrador("adminCrear");
+            fachada.SetUsuario(admin);
+
+            // Antes no hay usuarios
+            Assert.That(AdministrarUsuarios.Instancia.VerTodos().Count, Is.EqualTo(0));
+
+            // Crear usuario vía fachada
+            fachada.CrearUsuario("NuevoUser", "nuevo@gmail.com", "Apellido", "099999999");
+
+            // Ahora hay uno
+            Assert.That(AdministrarUsuarios.Instancia.VerTodos().Count, Is.EqualTo(1));
+            var creado = AdministrarUsuarios.Instancia.VerTodos()[0];
+            Assert.That(creado.Nombre, Is.EqualTo("NuevoUser"));
+            Assert.That(creado.Email, Is.EqualTo("nuevo@mail.com"));
+        }
+        [Test]
+        public void EliminarUsuario()
+        {
+            var admin = CrearAdministrador("adminDel");
+            var usuarioABorrar = CrearUsuarioNormal("borrame");
+            AdministrarUsuarios.Instancia.Crear("borrame", "b@b.com", "B", "222"); // ya existe
+
+            fachada.SetUsuario(admin);
+
+            var antes = AdministrarUsuarios.Instancia.VerTodos().Count;
+            fachada.EliminarUsuario(usuarioABorrar);
+
+            Assert.That(AdministrarUsuarios.Instancia.VerTodos().Count, Is.LessThan(antes));
+        }
+        [Test]
+        public void SuspenderUsuario()
+        {
+            var admin = CrearAdministrador("adminSuspender");
+            var usuarioObjetivo = CrearUsuarioNormal("usuarioASuspender");
+
+            // Aseguramos que exista en el sistema
+            AdministrarUsuarios.Instancia.Crear("usuarioASuspender", "suspender@mail.com", "Apellido", "123");
+
+            fachada.SetUsuario(admin);
+
+            Assert.That(usuarioObjetivo.Suspendido, Is.False);
+
+            fachada.SuspenderUsuario(usuarioObjetivo);
+
+            Assert.That(usuarioObjetivo.Suspendido, Is.True);
+        }
+        [Test]
+        public void RehabilitarUsuario()
+        {
+            var admin = CrearAdministrador("adminRehabilitar");
+            var usuarioSuspendido = CrearUsuarioNormal("usuarioSuspendido");
+
+            // Lo suspendemos primero
+            usuarioSuspendido.Suspendido = true;
+
+            fachada.SetUsuario(admin);
+
+            Assert.That(usuarioSuspendido.Suspendido, Is.True);
+
+            fachada.RehabilitarUsuario(usuarioSuspendido);
+
+            Assert.That(usuarioSuspendido.Suspendido, Is.False);
+        }
+        [Test]
+        public void ReasignarClienteAOtroVendedor()
+        {
+            var vendedorActual = CrearVendedor("vendedorJuan");
+            var vendedorNuevo   = CrearVendedor("vendedorMaria");
+            var cliente         = CrearClienteSimple(vendedorActual, "ClientePremium");
+
+            // El cliente empieza asignado al vendedor actual
+            vendedorActual.ListaClientesDeUsuario.Add(cliente);
+
+            // Logueamos al vendedor actual → debe poder reasignar
+            fachada.SetUsuario(vendedorActual);
+
+            Assert.DoesNotThrow(() =>
+                fachada.adne(cliente, vendedorActual, vendedorNuevo));
+
+            // Verificaciones finales
+            Assert.That(vendedorNuevo.ListaClientesDeUsuario, Does.Contain(cliente));
+            Assert.That(vendedorActual.ListaClientesDeUsuario, Does.Not.Contain(cliente));
+            Assert.That(cliente.UsuarioAsignado, Is.EqualTo(vendedorNuevo));
         }
     }
 }
