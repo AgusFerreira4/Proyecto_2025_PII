@@ -1,4 +1,5 @@
 using System;
+using ClassLibrary;
 using Library;
 
 namespace Ucu.Poo.DiscordBot.Domain
@@ -11,7 +12,6 @@ namespace Ucu.Poo.DiscordBot.Domain
     /// </summary>
     public class Facade
     {
-        private Fachada fac = new Fachada();
         #region Singleton
         
         private static Facade instance;
@@ -89,9 +89,36 @@ namespace Ucu.Poo.DiscordBot.Domain
 
             return result;
         }
+        public void SetUsuario(Usuario unUsuario)
+        {
+            user = unUsuario;
+        }
 
+        public void CrearCliente(string nombre, string apellido, string email, string telefono, string genero,
+            DateTime fechaNacimiento, Usuario usuarioAsignado)
+        {
+            foreach (var campo in new[] { nombre, apellido, email, telefono, genero })
+            {
+                ArgumentNullException.ThrowIfNullOrWhiteSpace(campo);
+            }
+            ArgumentNullException.ThrowIfNull(usuarioAsignado);
+            fac.CrearCliente(nombre, apellido, email, telefono, genero, fechaNacimiento, usuarioAsignado);
+        }
 
-
-
+        public void EliminarCliente(Cliente cliente)
+        {
+            ArgumentNullException.ThrowIfNull(cliente);
+            fac.EliminarCliente(cliente);
+        }
+        public void ModificarCliente(Cliente cliente, string? nombre, string? apellido, string? telefono,
+            string? correo, DateTime fechaNacimiento, string? genero)
+        {
+            fac.ModificarCliente(cliente, nombre, apellido, telefono, correo, fechaNacimiento, genero);
+        }
+        public void AgregarEtiquetaACliente(Cliente cliente, string etiqueta)
+        {
+            fac.AgregarEtiquetaACliente(cliente, etiqueta);
+        }
+        
     }
 }

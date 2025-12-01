@@ -14,6 +14,7 @@ namespace Library.Commands
 // ReSharper disable once UnusedType.Global
     public class UserInfoCommand : ModuleBase<SocketCommandContext>
     {
+        private Fachada fac = Fachada.Instancia;
         /// <summary>
         /// Implementa el comando 'userinfo', alias 'who' o 'whois' del bot.
         /// </summary>
@@ -44,7 +45,7 @@ namespace Library.Commands
             string userName =
                 displayName ?? CommandHelper.GetDisplayName(Context);
 
-            string result = Facade.Instance.GetUserInfo(userName);
+            string result = fac.GetUserInfo(userName);
 
             await ReplyAsync(result);
         }
