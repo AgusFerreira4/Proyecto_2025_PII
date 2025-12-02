@@ -50,5 +50,34 @@ namespace Library.Commands
                     $"No se pudo crear el usuario: {e.Message}");
             }
         }
+
+        public async Task SuspenderUserAsync(Usuario unUsuario)
+        {
+            try
+            {
+                fac.SuspenderUsuario(unUsuario);
+                await ReplyAsync(
+                $"Usuario **{unUsuario.Nombre} {unUsuario.Apellido}** suspendido correctamente.");
+            }
+            catch (Exception e)
+            {
+                await ReplyAsync($"No se pudo suspender el usuario: {e.Message}");
+            }
+        }
+
+        public async Task RehabilitarUserAsync(Usuario unUsuario)
+        {
+            try
+            {
+                fac.RehabilitarUsuario(unUsuario);
+                await ReplyAsync($"Usuario: {unUsuario.Nombre} {unUsuario.Apellido} rehabilitado correctamente.");
+
+            }
+            catch (Exception e)
+            {
+                await ReplyAsync($"No se ha podido rehabilitar el usuario: {e.Message}");
+            }
+        }
+        
     }
 }
