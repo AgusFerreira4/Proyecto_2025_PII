@@ -34,7 +34,7 @@ namespace ConsoleApplication
 
         private static void DemoBot()
         {
-            
+            Console.WriteLine($"Token leído: '{Environment.GetEnvironmentVariable("DiscordToken")}'");
             BotLoader.LoadAsync().GetAwaiter().GetResult();
         }
     }
