@@ -35,6 +35,8 @@ namespace Library.Commands
                     $"No se pudo crear el usuario: {ex.Message}");
             }
         }
+        [Command("eliminarUser")]
+        [Summary("Elimina un usuario nuevo en el sistema.")]
         public async Task EliminarUserAsync(Usuario unUsuario)
         {
             try
@@ -51,6 +53,8 @@ namespace Library.Commands
             }
         }
 
+        [Command("suspenderUser")]
+        [Summary("Suspende un usuario nuevo en el sistema.")]
         public async Task SuspenderUserAsync(Usuario unUsuario)
         {
             try
@@ -65,6 +69,8 @@ namespace Library.Commands
             }
         }
 
+        [Command("rehabilitarUser")]
+        [Summary("Rehabilita un usuario nuevo en el sistema.")]
         public async Task RehabilitarUserAsync(Usuario unUsuario)
         {
             try
