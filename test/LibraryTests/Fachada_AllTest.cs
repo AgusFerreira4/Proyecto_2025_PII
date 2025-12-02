@@ -398,11 +398,11 @@ namespace Tests
             fachada.SetUsuario(admin);
 
             // Suspender
-            fachada.SuspenderUsuario(target);
+            fachada.SuspenderUsuario(target.Id);
             Assert.That(target.Suspendido == true);
 
             // Rehabilitar
-            fachada.RehabilitarUsuario(target);
+            fachada.RehabilitarUsuario(target.Id);
             Assert.That(target.Suspendido == false);
         }
 
@@ -418,7 +418,7 @@ namespace Tests
 
             // Obtener referencia al usuario creado
             var creado = lista[0];
-            fachada.EliminarUsuario(creado);
+            fachada.EliminarUsuario(creado.Id);
 
             Assert.That(0 == AdministrarUsuarios.Instancia.VerTodos().Count);
         }

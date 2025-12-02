@@ -4,15 +4,6 @@
         <name>Library</name>
     </assembly>
     <members>
-        <member name="M:Library.Commands.ComandosUsuario.CrearUserAsync(System.String,System.String,System.String,System.String)">
-            <summary>
-            Crea un nuevo usuario en el sistema con nombre, email, apellido y teléfono.
-            </summary>
-            <param name="nombre">Nombre del usuario.</param>
-            <param name="apellido">Apellido del usuario.</param>
-            <param name="email">Email del usuario.</param>
-            <param name="telefono">Teléfono del usuario.</param>
-        </member>
         <member name="T:Library.Commands.UserInfoCommand">
             <summary>
             Esta clase implementa el comando 'userinfo', alias 'who' o 'whois' del bot.

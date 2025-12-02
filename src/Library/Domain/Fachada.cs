@@ -1,8 +1,7 @@
 using System;
-using ClassLibrary;
 using System.Collections.Generic;
+using ClassLibrary;
 using Library.Excepciones;
-
 
 namespace Library
 {
@@ -10,31 +9,37 @@ namespace Library
     {
         private static Fachada _instancia;
 
-        private Fachada()
-        {
-            
-        }
+        private Fachada() { }
+
         public static Fachada Instancia
         {
             get
             {
                 if (_instancia == null)
-                {
                     _instancia = new Fachada();
-                }
-
                 return _instancia;
             }
-            
         }
+
+        private Usuario user { get; set; }
+
         public void SetUsuario(Usuario unUsuario)
         {
             user = unUsuario;
         }
-        
-        private Usuario user { get; set; }
-        
-        
+
+  
+        public Usuario? BuscarUsuarioPorId(Guid id)
+        {
+            return AdministrarUsuarios.Instancia.BuscarPorId(id);
+        }
+
+        public List<Usuario> VerUsuarios()
+        {
+            return AdministrarUsuarios.Instancia.VerTodos();
+        }
+
+     
         private Administrador VerificarAdministrador(Usuario usuario)
         {
             if (usuario is Administrador admin)
@@ -47,12 +52,52 @@ namespace Library
         {
             if (usuario is Vendedor vendedor)
                 return vendedor;
-            
-            throw new PermisoDenegadoException("Acceso denegad: se requieren permisos de vendedor");
+
+            throw new PermisoDenegadoException("Acceso denegado: se requieren permisos de vendedor.");
         }
 
+ 
+        public void CrearUsuario(string nombre, string email, string apellido, string telefono)
+        {
+            Administrador admin = VerificarAdministrador(user);
+            admin.CrearUsuario(nombre, email, apellido, telefono);
+        }
+
+        public void EliminarUsuario(Guid id)
+        {
+            Administrador admin = VerificarAdministrador(user);
+
+            Usuario? u = AdministrarUsuarios.Instancia.BuscarPorId(id);
+            if (u == null)
+                throw new ArgumentException("No existe un usuario con ese ID.");
+
+            admin.EliminarUsuario(u);
+        }
+
+        public void SuspenderUsuario(Guid id)
+        {
+            Administrador admin = VerificarAdministrador(user);
+
+            Usuario? u = AdministrarUsuarios.Instancia.BuscarPorId(id);
+            if (u == null)
+                throw new ArgumentException("No existe un usuario con ese ID.");
+
+            admin.SuspenderUsuario(u);
+        }
+
+        public void RehabilitarUsuario(Guid id)
+        {
+            Administrador admin = VerificarAdministrador(user);
+
+            Usuario? u = AdministrarUsuarios.Instancia.BuscarPorId(id);
+            if (u == null)
+                throw new ArgumentException("No existe un usuario con ese ID.");
+
+            admin.ReahnilitarUsuario(u);
+        }
+        
         public void CrearCliente(string nombre, string apellido, string email, string telefono, string genero,
-                             DateTime fechaNacimiento, Usuario usuarioAsignado)
+            DateTime fechaNacimiento, Usuario usuarioAsignado)
         {
             user.CrearCliente(nombre, apellido, email, telefono, genero, fechaNacimiento, usuarioAsignado);
         }
@@ -63,7 +108,7 @@ namespace Library
         }
 
         public void ModificarCliente(Cliente cliente, string? nombre, string? apellido, string? telefono,
-                                     string? correo, DateTime fechaNacimiento, string? genero)
+            string? correo, DateTime fechaNacimiento, string? genero)
         {
             user.ModificarCliente(cliente, nombre, apellido, telefono, correo, fechaNacimiento, genero);
         }
@@ -107,7 +152,7 @@ namespace Library
         {
             user.EliminarInteraccion(interaccion, cliente);
         }
-    
+
         public void AgregarNota(Interaccion interaccion, string nota)
         {
             user.AgregarNota(interaccion, nota);
@@ -156,30 +201,6 @@ namespace Library
         public void VerPanelResumen()
         {
             user.VerPanelResumen();
-        }
-
-        public void CrearUsuario(string nombre, string email, string apellido, string telefono)
-        {
-            Administrador admin = VerificarAdministrador(user);
-            admin.CrearUsuario(nombre, email, apellido, telefono);
-        }
-
-        public void EliminarUsuario(Usuario unUsuario)
-        {
-            Administrador admin = VerificarAdministrador(user);
-            admin.EliminarUsuario(unUsuario);
-        }
-
-        public void SuspenderUsuario(Usuario unUsuario)
-        {
-            Administrador admin = VerificarAdministrador(user);
-            admin.SuspenderUsuario(unUsuario);
-        }
-
-        public void RehabilitarUsuario(Usuario unUsuario)
-        {
-            Administrador admin = VerificarAdministrador(user);
-            admin.ReahnilitarUsuario(unUsuario);
         }
 
         public void adne(Cliente cliente, Vendedor vendedor, Vendedor vendedorNuevo)

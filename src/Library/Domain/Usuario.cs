@@ -7,6 +7,7 @@ namespace ClassLibrary
 {
     public class Usuario : Persona
     {
+        public Guid Id { get; } = Guid.NewGuid();
         public bool Suspendido { get; set; }
         public List<Cliente> ListaClientesDeUsuario { get; set; }
         public List<Venta> ListaVentas { get; set; }
