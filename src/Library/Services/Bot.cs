@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
-
+    
 
 namespace Library.Services
 {
