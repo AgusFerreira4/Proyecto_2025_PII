@@ -9,9 +9,9 @@
             Programa de consola de demostración.
             </summary>
         </member>
-        <member name="M:ConsoleApplication.Program.Main">
+        <member name="M:ConsoleApplication.Program.Main(System.String[])">
             <summary>
-            Punto de entrada al programa principal.
+            Punto de entrada al programa.
             </summary>
         </member>
     </members>
