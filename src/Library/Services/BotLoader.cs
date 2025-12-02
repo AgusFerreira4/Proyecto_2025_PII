@@ -17,8 +17,8 @@ namespace Library.Services
     {
         public static async Task LoadAsync()
         {
-            var configuration = new ConfigurationBuilder()
-                .AddUserSecrets(Assembly.GetExecutingAssembly())
+            var configuration = new ConfigurationBuilder()  
+                .AddUserSecrets("ProjectTemplate")
                 .Build();
 
             var serviceProvider = new ServiceCollection()

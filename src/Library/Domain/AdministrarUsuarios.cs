@@ -7,65 +7,57 @@ namespace Library
     public class AdministrarUsuarios
     {
         private static AdministrarUsuarios _instancia;
-        private  List<Usuario> usuarios = new List<Usuario>();
-        
-        private AdministrarUsuarios() {}
+        private List<Usuario> usuarios = new List<Usuario>();
 
+        private AdministrarUsuarios()
+        {
+        }
 
         public static AdministrarUsuarios Instancia
         {
             get
             {
                 if (_instancia == null)
-                {
                     _instancia = new AdministrarUsuarios();
-                }
                 return _instancia;
             }
         }
 
         public void Crear(string nombre, string apellido, string email, string telefono)
         {
-            try
-            {
             Usuario nuevo = new Usuario(nombre, email, apellido, telefono);
             usuarios.Add(nuevo);
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine($"Error al crear usuario: {ex.Message}");
-                throw;
-            }
         }
 
         public void EliminarUsuario(Usuario usuario)
         {
-            try
-            {
-                usuarios.Remove(usuario);
-            }
-            catch (ArgumentNullException e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            usuarios.Remove(usuario);
         }
 
         public void SuspenderUsuario(Usuario usuario)
         {
-            ArgumentNullException.ThrowIfNull(usuario);
             usuario.Suspendido = true;
         }
 
         public void RehabilitarUsuario(Usuario usuario)
         {
-            ArgumentNullException.ThrowIfNull(usuario);
             usuario.Suspendido = false;
-        } 
+        }
+
         public List<Usuario> VerTodos()
         {
             return usuarios;
         }
-    } 
+
+       
+        public Usuario? BuscarPorId(Guid id)
+        {
+            return usuarios.Find(u => u.Id == id);
+        }
+
+        public Usuario? BuscarPorEmail(string email)
+        {
+            return usuarios.Find(u => u.Email == email);
+        }
+    }
 }
-        
