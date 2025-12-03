@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using ClassLibrary;
+using Discord.Commands;
 using Library.Excepciones;
 
 namespace Library
@@ -9,17 +10,11 @@ namespace Library
     {
         private static Fachada _instancia;
 
-        private Fachada() { }
-
-        public static Fachada Instancia
+        private Fachada()
         {
-            get
-            {
-                if (_instancia == null)
-                    _instancia = new Fachada();
-                return _instancia;
-            }
         }
+
+        public static Fachada Instancia => _instancia ??= new Fachada();
 
         private Usuario user { get; set; }
 
@@ -28,7 +23,7 @@ namespace Library
             user = unUsuario;
         }
 
-  
+        // ====================== USUARIOS ======================
         public Usuario? BuscarUsuarioPorId(Guid id)
         {
             return AdministrarUsuarios.Instancia.BuscarPorId(id);
@@ -39,7 +34,6 @@ namespace Library
             return AdministrarUsuarios.Instancia.VerTodos();
         }
 
-     
         private Administrador VerificarAdministrador(Usuario usuario)
         {
             if (usuario is Administrador admin)
@@ -56,7 +50,6 @@ namespace Library
             throw new PermisoDenegadoException("Acceso denegado: se requieren permisos de vendedor.");
         }
 
- 
         public void CrearUsuario(string nombre, string email, string apellido, string telefono)
         {
             Administrador admin = VerificarAdministrador(user);
@@ -66,71 +59,66 @@ namespace Library
         public void EliminarUsuario(Guid id)
         {
             Administrador admin = VerificarAdministrador(user);
-
             Usuario? u = AdministrarUsuarios.Instancia.BuscarPorId(id);
-            if (u == null)
-                throw new ArgumentException("No existe un usuario con ese ID.");
-
+            if (u == null) throw new ArgumentException("No existe un usuario con ese ID.");
             admin.EliminarUsuario(u);
         }
 
         public void SuspenderUsuario(Guid id)
         {
             Administrador admin = VerificarAdministrador(user);
-
             Usuario? u = AdministrarUsuarios.Instancia.BuscarPorId(id);
-            if (u == null)
-                throw new ArgumentException("No existe un usuario con ese ID.");
-
+            if (u == null) throw new ArgumentException("No existe un usuario con ese ID.");
             admin.SuspenderUsuario(u);
         }
 
         public void RehabilitarUsuario(Guid id)
         {
             Administrador admin = VerificarAdministrador(user);
-
             Usuario? u = AdministrarUsuarios.Instancia.BuscarPorId(id);
-            if (u == null)
-                throw new ArgumentException("No existe un usuario con ese ID.");
-
+            if (u == null) throw new ArgumentException("No existe un usuario con ese ID.");
             admin.ReahnilitarUsuario(u);
         }
-        
-        public void CrearCliente(string nombre, string apellido, string email, string telefono, string genero,
+
+        // ====================== CLIENTES ======================
+        public Cliente CrearCliente(string nombre, string apellido, string email, string telefono, string genero,
             DateTime fechaNacimiento, Usuario usuarioAsignado)
         {
-            user.CrearCliente(nombre, apellido, email, telefono, genero, fechaNacimiento, usuarioAsignado);
+           return user.CrearCliente(nombre, apellido, email, telefono, genero, fechaNacimiento, usuarioAsignado);
         }
 
-        public void EliminarCliente(Cliente cliente)
+        public void EliminarCliente(Guid id)
         {
-            user.EliminarCliente(cliente);
+            user.EliminarCliente(AdministrarClientes.Instancia.BuscarClientePorId(id)
+                                 ?? throw new ArgumentException("No existe un cliente con ese ID."));
         }
 
-        public void ModificarCliente(Cliente cliente, string? nombre, string? apellido, string? telefono,
-            string? correo, DateTime fechaNacimiento, string? genero)
+        public void ModificarCliente(Guid id, string? nombre = null, string? apellido = null, string? telefono = null,
+            string? correo = null, DateTime? fechaNacimiento = null, string? genero = null)
         {
-            user.ModificarCliente(cliente, nombre, apellido, telefono, correo, fechaNacimiento, genero);
+            Cliente? cliente = AdministrarClientes.Instancia.BuscarClientePorId(id)
+                               ?? throw new ArgumentException("No existe un cliente con ese ID.");
+            user.ModificarCliente(cliente, nombre, apellido, telefono, correo,
+                fechaNacimiento ?? cliente.FechaDeNacimiento, genero);
         }
 
-        public void AgregarEtiquetaACliente(Cliente cliente, string etiqueta)
+        public void AgregarEtiquetaACliente(Guid id, string etiqueta)
         {
+            Cliente? cliente = AdministrarClientes.Instancia.BuscarClientePorId(id)
+                               ?? throw new ArgumentException("No existe un cliente con ese ID.");
             user.AgregarEtiquetaACliente(cliente, etiqueta);
         }
 
-        public void BuscarCliente(string criterio)
+        public Cliente BuscarClientePorCriterio(string criterio)
         {
-            user.BuscarCliente(criterio);
+            return AdministrarClientes.Instancia.BuscarCliente(criterio);
         }
 
-        public void AgregarInteraccion(Cliente cliente, Interaccion interaccion)
+        public void AgregarInteraccion(Guid idCliente, Interaccion interaccion)
         {
+            Cliente? cliente = AdministrarClientes.Instancia.BuscarClientePorId(idCliente)
+                               ?? throw new ArgumentException("No existe un cliente con ese ID.");
             user.AgregarInteraccion(cliente, interaccion);
-        }
-
-        public void AgregarCliente(Cliente cliente)
-        {
-            user.AgregarCliente(cliente);
         }
 
         public List<Cliente> VerClientes()
@@ -138,23 +126,31 @@ namespace Library
             return user.VerClientes();
         }
 
-        public List<Interaccion> VerInteraccionesCliente(Cliente cliente)
+        public List<Interaccion> VerInteraccionesCliente(Guid idCliente)
         {
+            Cliente? cliente = AdministrarClientes.Instancia.BuscarClientePorId(idCliente)
+                               ?? throw new ArgumentException("No existe un cliente con ese ID.");
             return user.VerInteraccionesCliente(cliente);
         }
 
-        public List<Interaccion> VerInteraccionesCliente(Cliente cliente, string? tipo = null, DateTime? fecha = null)
+        public List<Interaccion> VerInteraccionesCliente(Guid idCliente, string? tipo = null, DateTime? fecha = null)
         {
+            Cliente? cliente = AdministrarClientes.Instancia.BuscarClientePorId(idCliente)
+                               ?? throw new ArgumentException("No existe un cliente con ese ID.");
             return user.VerInteraccionesCliente(cliente, tipo, fecha);
         }
 
-        public void EliminarInteraccion(Interaccion interaccion, Cliente cliente)
+        public void EliminarInteraccion(Guid idCliente, Interaccion interaccion)
         {
+            Cliente? cliente = AdministrarClientes.Instancia.BuscarClientePorId(idCliente)
+                               ?? throw new ArgumentException("No existe un cliente con ese ID.");
             user.EliminarInteraccion(interaccion, cliente);
         }
 
-        public void AgregarNota(Interaccion interaccion, string nota)
+        public void AgregarNota(Guid idCliente, Interaccion interaccion, string nota)
         {
+            Cliente? cliente = AdministrarClientes.Instancia.BuscarClientePorId(idCliente)
+                               ?? throw new ArgumentException("No existe un cliente con ese ID.");
             user.AgregarNota(interaccion, nota);
         }
 
@@ -168,6 +164,31 @@ namespace Library
             return user.VerClientesEnVisto();
         }
 
+        public List<Cliente> ListarClientesPorMontoMayor(int monto)
+        {
+            return AdministrarClientes.Instancia.ListarClientesPorMontoMayor(monto);
+        }
+
+        //Defensa
+        public List<Cliente> ListarClientesPorMontoMenor(int monto)
+        {
+            return AdministrarClientes.Instancia.ListarClientesPorMontoMenor(monto);
+
+        }
+
+        public List<Cliente> ListarClientesPorRangoDeMontos(int monto1, int monto2)
+        {
+            return AdministrarClientes.Instancia.ListarCLientesPorMontoRango(monto1, monto2);
+        }
+
+        public List<Cliente> ListarClientesPorProducto(string nombreProducto)
+        {
+            return AdministrarClientes.Instancia.ListarClientesPorProducto(nombreProducto);
+        }
+
+        //Defensa
+
+// ====================== VENTAS ======================
         public List<Venta> VerVentasPorPeriodo(DateTime fechaini, DateTime fechafin)
         {
             return user.VerVentasPorPeriodo(fechaini, fechafin);
@@ -178,8 +199,11 @@ namespace Library
             user.RegistrarCotizacion(total, fecha, fechaLimite, descripcion);
         }
 
-        public Venta CrearVenta(Vendedor vendedor, Cliente cliente, Dictionary<Producto, int> productosCantidad, DateTime fecha)
+        public Venta CrearVenta(Vendedor vendedor, Guid idCliente, Dictionary<Producto, int> productosCantidad,
+            DateTime fecha)
         {
+            Cliente? cliente = AdministrarClientes.Instancia.BuscarClientePorId(idCliente)
+                               ?? throw new ArgumentException("No existe un cliente con ese ID.");
             return user.crearVenta(vendedor, cliente, productosCantidad, fecha);
         }
 
@@ -203,9 +227,12 @@ namespace Library
             user.VerPanelResumen();
         }
 
-        public void adne(Cliente cliente, Vendedor vendedor, Vendedor vendedorNuevo)
+        // Cambiar vendedor asignado
+        public void CambiarVendedorAsignado(Guid idCliente, Vendedor vendedorNuevo)
         {
-            vendedor = VerificarVendedor(user);
+            Vendedor vendedor = VerificarVendedor(user);
+            Cliente? cliente = AdministrarClientes.Instancia.BuscarClientePorId(idCliente)
+                               ?? throw new ArgumentException("No existe un cliente con ese ID.");
             vendedor.CambiarVendedorAsignado(cliente, vendedorNuevo);
         }
     }

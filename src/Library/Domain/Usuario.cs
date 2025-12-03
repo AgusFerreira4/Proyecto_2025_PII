@@ -30,10 +30,10 @@ namespace ClassLibrary
         }
 
 
-        public void CrearCliente(string nombre, string apellido, string email, string telefono, string genero,
+        public Cliente CrearCliente(string nombre, string apellido, string email, string telefono, string genero,
             DateTime fechaDeNacimiento, Usuario usuarioAsignado)
         {
-            AdministrarClientes.Instancia.CrearCliente(nombre, apellido, telefono, email, genero, fechaDeNacimiento,
+            return AdministrarClientes.Instancia.CrearCliente(nombre, apellido, telefono, email, genero, fechaDeNacimiento,
                 usuarioAsignado);
         }
 
@@ -206,6 +206,7 @@ namespace ClassLibrary
         {
             Venta venta = new Venta(productosCantidad, fecha, cliente, vendedor);
             RegistrarVenta(venta);
+            cliente.ListaVentas.Add(venta);
             return venta;
         }
 

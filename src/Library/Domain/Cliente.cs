@@ -13,11 +13,13 @@ namespace ClassLibrary
     + UsuarioAsignado : Usuario
     - ListaInteracciones : GenericContainer<Interaccion>
     */
+        public Guid Id { get; } = Guid.NewGuid();
         public string Telefono { get; set; }
         public string Genero { get; set; }
         public DateTime FechaDeNacimiento { get; set; }
         public List<string> Etiquetas { get; set; }
         public Usuario UsuarioAsignado { get; set; }
+        public List<Venta> ListaVentas { get; set; }
         
 
         public Cliente(string nombre, string apellido, string email, string telefono, string genero,
@@ -29,7 +31,8 @@ namespace ClassLibrary
             this.FechaDeNacimiento = fechaDeNacimiento;
             this.UsuarioAsignado = usuarioAsignado;
             this.Etiquetas = new List<string>();
-            
+            this.ListaVentas = new List<Venta>();
+
         }
 
     }

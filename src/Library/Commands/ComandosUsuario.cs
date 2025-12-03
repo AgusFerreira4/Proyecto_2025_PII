@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ClassLibrary;
 using Discord.Commands;
@@ -10,58 +11,62 @@ namespace Library.Commands
     {
         private readonly Fachada fac = Fachada.Instancia;
 
-        /// <summary>
-        /// Crea un nuevo usuario en el sistema con nombre, email, apellido y teléfono.
-        /// </summary>
-        /// <param name="nombre">Nombre del usuario.</param>
-        /// <param name="apellido">Apellido del usuario.</param>
-        /// <param name="email">Email del usuario.</param>
-        /// <param name="telefono">Teléfono del usuario.</param>
-        [Command("crearUser")]
-        [Summary("Crea un usuario nuevo en el sistema.")]
-        public async Task CrearUserAsync(
-             string nombre, string apellido,string email,string telefono)
+        public ComandosUsuario()
+        {
+            
+            var adminBot = new Administrador("BotAdmin", "bot@crm.com", "Bot", "000");
+            Fachada.Instancia.SetUsuario(adminBot);
+        }
+
+       
+        [Command("crear")]
+        public async Task CrearUserAsync(string nombre, string apellido, string email, string telefono)
         {
             try
             {
                 fac.CrearUsuario(nombre, email, apellido, telefono);
-
-                await ReplyAsync(
-                    $"Usuario **{nombre} {apellido}** creado correctamente.");
+                await ReplyAsync($"Usuario **{nombre} {apellido}** creado correctamente.");
             }
             catch (Exception ex)
             {
-                await ReplyAsync(
-                    $"No se pudo crear el usuario: {ex.Message}");
-            }
-        }
-        [Command("eliminarUser")]
-        [Summary("Elimina un usuario nuevo en el sistema.")]
-        public async Task EliminarUserAsync(Usuario unUsuario)
-        {
-            try
-            {
-                fac.EliminarUsuario(unUsuario);
-                await ReplyAsync(
-                    $"Usuario **{unUsuario.Nombre} {unUsuario.Apellido}** eliminado correctamente."
-                );
-            }
-            catch (Exception e)
-            {
-                await ReplyAsync(
-                    $"No se pudo crear el usuario: {e.Message}");
+                await ReplyAsync($"No se pudo crear el usuario: {ex.Message}");
             }
         }
 
-        [Command("suspenderUser")]
-        [Summary("Suspende un usuario nuevo en el sistema.")]
-        public async Task SuspenderUserAsync(Usuario unUsuario)
+     
+        [Command("borrar")]
+        public async Task EliminarUserAsync(string idTexto)
         {
+            if (!Guid.TryParse(idTexto, out Guid id))
+            {
+                await ReplyAsync("El ID ingresado no es válido.");
+                return;
+            }
+
             try
             {
-                fac.SuspenderUsuario(unUsuario);
-                await ReplyAsync(
-                $"Usuario **{unUsuario.Nombre} {unUsuario.Apellido}** suspendido correctamente.");
+                fac.EliminarUsuario(id);
+                await ReplyAsync($"Usuario con ID `{id}` eliminado correctamente.");
+            }
+            catch (Exception e)
+            {
+                await ReplyAsync($"No se pudo borrar el usuario: {e.Message}");
+            }
+        }
+
+        [Command("suspender")]
+        public async Task SuspenderUserAsync(string idTexto)
+        {
+            if (!Guid.TryParse(idTexto, out Guid id))
+            {
+                await ReplyAsync("El ID ingresado no es válido.");
+                return;
+            }
+
+            try
+            {
+                fac.SuspenderUsuario(id);
+                await ReplyAsync($"Usuario `{id}` suspendido correctamente.");
             }
             catch (Exception e)
             {
@@ -69,21 +74,53 @@ namespace Library.Commands
             }
         }
 
-        [Command("rehabilitarUser")]
-        [Summary("Rehabilita un usuario nuevo en el sistema.")]
-        public async Task RehabilitarUserAsync(Usuario unUsuario)
+        [Command("habilitar")]
+        public async Task HabilitarUserAsync(string idTexto)
         {
+            if (!Guid.TryParse(idTexto, out Guid id))
+            {
+                await ReplyAsync("El ID ingresado no es válido.");
+                return;
+            }
+
             try
             {
-                fac.RehabilitarUsuario(unUsuario);
-                await ReplyAsync($"Usuario: {unUsuario.Nombre} {unUsuario.Apellido} rehabilitado correctamente.");
-
+                fac.RehabilitarUsuario(id);
+                await ReplyAsync($"Usuario `{id}` rehabilitado correctamente.");
             }
             catch (Exception e)
             {
-                await ReplyAsync($"No se ha podido rehabilitar el usuario: {e.Message}");
+                await ReplyAsync($"No se pudo rehabilitar el usuario: {e.Message}");
             }
         }
         
+        [Command("listar")]
+        public async Task VerAllUsers()
+        {
+            try
+            {
+                List<Usuario> users = fac.VerUsuarios();
+
+                if (users.Count == 0)
+                {
+                    await ReplyAsync("No hay usuarios registrados.");
+                    return;
+                }
+
+                string respuesta = "**Usuarios registrados:**\n";
+
+                foreach (Usuario u in users)
+                {
+                    respuesta +=
+                        $"- **{u.Nombre} {u.Apellido}** | Email: `{u.Email}` | ID: `{u.Id}` | Suspendido: {u.Suspendido}\n";
+                }
+
+                await ReplyAsync(respuesta);
+            }
+            catch (Exception e)
+            {
+                await ReplyAsync($"Error al listar usuarios: {e.Message}");
+            }
+        }
     }
 }
