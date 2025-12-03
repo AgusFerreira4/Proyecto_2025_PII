@@ -11,7 +11,7 @@ public class GestorVentas
 + ObtenerVentas(): List<Venta>
      */
     private static GestorVentas instancia;
-    private List<Venta> ventas;
+    public static List<Venta> ventas;
 
     private GestorVentas() 
     {

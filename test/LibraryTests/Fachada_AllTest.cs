@@ -480,6 +480,30 @@ namespace Tests
             // El primero debería ser el más antiguo (i=5)
             Assert.That("Cli5" == resultado[0].Nombre);
         }
+
+        [Test]
+
+        public void Venta_mayores_a_monto()
+        {
+            var user = CrearUsuarioNormal("u19");
+            fachada.SetUsuario(user);
+            var producto = CrearProducto("Prod", 2001);
+
+            var cli = CrearClienteSimple(user, "Cli");
+        }
+        
+        
+        [Test]
+        public void Ventas_Producto_verClienteconVenta()
+        {
+            var user = CrearUsuarioNormal("u19");
+            fachada.SetUsuario(user);
+            
+            var producto = CrearProducto("p1");
+            var cli = CrearClienteSimple(user, "Cli" );
+            user.AgregarCliente(cli);
+        }
+        
     }
 
 }

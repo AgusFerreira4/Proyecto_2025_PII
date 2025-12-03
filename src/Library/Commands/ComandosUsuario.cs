@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using ClassLibrary;
 using Discord.Commands;
@@ -151,5 +152,57 @@ namespace Library.Commands
             }
         }
         
+        [Command("clientesproducto")]
+        public async Task ClientesConProductoAsync(string Criterio)
+        {
+            try
+            {
+                var ventas = Usuario.ListaVentas;
+                var clientesConProducto = new HashSet<Cliente>();
+
+                foreach (var venta in ventas)
+                {
+                    foreach (var item in venta.ProductosCantidad)
+                    {
+                        if (item.Key.Nombre.Equals(Criterio, StringComparison.OrdinalIgnoreCase))
+                        {
+                            clientesConProducto.Add(venta.ClienteComprador);
+                        }
+                    }
+                }
+                
+                string respuesta = $"**Clientes que compraron {Criterio}:**\n";
+                foreach (var c in clientesConProducto)
+                {
+                    respuesta += $"- **{c.Nombre} {c.Apellido}**\n";
+                }
+                await ReplyAsync(respuesta);
+                
+                
+                
+                
+
+                
+            }
+            catch (Exception e)
+            {
+                await ReplyAsync($"No se ha podido rehabilitar el usuario: {e.Message}"); 
+            }   }
     }
+        [Command("CLientesmayora")]
+    
+        public async Task Clientes_mayoraAsync()
+    {
+        try
+        {
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+    
+    
 }

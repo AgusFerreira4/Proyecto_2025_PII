@@ -10,7 +10,7 @@ namespace ClassLibrary
         public Guid Id { get; } = Guid.NewGuid();
         public bool Suspendido { get; set; }
         public List<Cliente> ListaClientesDeUsuario { get; set; }
-        public List<Venta> ListaVentas { get; set; }
+        public static List<Venta> ListaVentas { get; set; }
         public List<Cotizacion> ListaCotizaciones { get; set; }
 
 
@@ -207,6 +207,7 @@ namespace ClassLibrary
             Venta venta = new Venta(productosCantidad, fecha, cliente, vendedor);
             RegistrarVenta(venta);
             return venta;
+           
         }
 
         public List<Venta> ObtenerVentas()
@@ -260,6 +261,9 @@ namespace ClassLibrary
                                                                     $"Lugar: {i.Lugar}" +
                                                                     $"Fecha: {i.Fecha} "));
         }
+
+      
     }
+    
     
 }

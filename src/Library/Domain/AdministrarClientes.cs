@@ -7,7 +7,7 @@ namespace Library
 {
     public class AdministrarClientes
     {
-        private List<Cliente> ListaClientes = new List<Cliente>();
+        public static List<Cliente> ListaClientes = new List<Cliente>();
         private static AdministrarClientes _instancia;
         private AdministrarClientes() { }
         public static AdministrarClientes Instancia
@@ -99,8 +99,9 @@ namespace Library
 
             throw new KeyNotFoundException("No se encontró ningún cliente con ese criterio.");
         }
+        
+        
 
-            
-        }
+    }
 }
     
