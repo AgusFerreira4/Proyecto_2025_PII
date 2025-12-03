@@ -208,5 +208,15 @@ namespace Library
             vendedor = VerificarVendedor(user);
             vendedor.CambiarVendedorAsignado(cliente, vendedorNuevo);
         }
+
+        public List<Cliente> BuscarClientesPorVentaEntre(int v1, int v2)
+        {
+            return AdministrarUsuarios.Instancia.BuscarClientePorVentaEntre(v1, v2);
+        }
+
+        public List<Cliente> BuscarClientesPorProducto(Producto producto)
+        {
+            return AdministrarUsuarios.Instancia.BuscarClientesPorProducto(producto);
+        }
     }
 }

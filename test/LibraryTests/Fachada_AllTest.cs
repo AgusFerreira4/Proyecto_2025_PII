@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using ClassLibrary;
 using Library;
@@ -479,7 +480,70 @@ namespace Tests
             Assert.That(5 == resultado.Count);
             // El primero debería ser el más antiguo (i=5)
             Assert.That("Cli5" == resultado[0].Nombre);
-        }
-    }
 
-}
+        }
+
+        // ---------------- Defensa ----------------
+        //comando que retorne los clientes con ventas mayores o menores a cierto monto o dentro de cierto rango de montos
+
+            [Test]
+            public void BuscarClientePorVentaEntre_RetornaSegunCondicion()
+            {
+                var user = CrearUsuarioNormal("juan");
+                fachada.SetUsuario(user);
+                AdministrarUsuarios.Instancia.Add(user);
+                    
+                var cli1 = CrearClienteSimple(user, "cli1");
+                user.AgregarCliente(cli1);
+                
+                var cli2 = CrearClienteSimple(user, "cli2");
+                user.AgregarCliente(cli2);
+                
+                Producto pr1 = CrearProducto("pr1", 30);
+
+                var dict = new Dictionary<Producto, int> { { pr1, 2 } };
+                var dict2 = new Dictionary<Producto, int> { { pr1, 4 } };
+
+                
+                var v1 = new Venta(dict, DateTime.Now, cli1, user);
+                user.RegistrarVenta(v1);
+
+                var v2 = new Venta(dict2, DateTime.Now, cli2, user);
+                user.RegistrarVenta(v2);
+
+                var listaClientes = AdministrarUsuarios.Instancia.BuscarClientePorVentaEntre(20, 70);
+                Assert.That("cli1" == listaClientes[0].Nombre);
+
+            }
+            
+            [Test]
+            public void BuscarClientePorProducto_RetornaSegunCondicion()
+            {
+                var user = CrearUsuarioNormal("juan");
+                fachada.SetUsuario(user);
+                AdministrarUsuarios.Instancia.Add(user);
+                    
+                var cli1 = CrearClienteSimple(user, "cli1");
+                user.AgregarCliente(cli1);
+                
+                var cli2 = CrearClienteSimple(user, "cli2");
+                user.AgregarCliente(cli2);
+                
+                Producto pr1 = CrearProducto("pr1", 30);
+                Producto pr2 = CrearProducto("pr2", 90);
+
+                var dict = new Dictionary<Producto, int> { { pr1, 2 } };
+                var dict2 = new Dictionary<Producto, int> { { pr2, 4 } };
+                
+                var v1 = new Venta(dict, DateTime.Now, cli1, user);
+                user.RegistrarVenta(v1);
+
+                var v2 = new Venta(dict2, DateTime.Now, cli2, user);
+                user.RegistrarVenta(v2);
+
+                var listaCli = AdministrarUsuarios.Instancia.BuscarClientesPorProducto(pr1);
+                Assert.That("cli1" == listaCli[0].Nombre);
+
+            }
+    }
+    }

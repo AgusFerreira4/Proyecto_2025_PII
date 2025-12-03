@@ -18,7 +18,7 @@ namespace Library.Commands
             Fachada.Instancia.SetUsuario(adminBot);
         }
 
-       
+
         [Command("crear")]
         public async Task CrearUserAsync(string nombre, string apellido, string email, string telefono)
         {
@@ -33,7 +33,7 @@ namespace Library.Commands
             }
         }
 
-     
+
         [Command("borrar")]
         public async Task EliminarUserAsync(string idTexto)
         {
@@ -93,7 +93,7 @@ namespace Library.Commands
                 await ReplyAsync($"No se pudo rehabilitar el usuario: {e.Message}");
             }
         }
-        
+
         [Command("listar")]
         public async Task VerAllUsers()
         {
@@ -120,6 +120,87 @@ namespace Library.Commands
             catch (Exception e)
             {
                 await ReplyAsync($"Error al listar usuarios: {e.Message}");
+            }
+        }
+
+        //comando que retorne los clientes con ventas mayores o menores a cierto monto o dentro de cierto rango de montos
+        [Command("BuscarEntreDosValores")]
+        public async Task BuscarClienteEntreValores(string valor1, string valor2)
+        {
+            if (!Int32.TryParse(valor1, out int v1))
+            {
+                await ReplyAsync("El primer valor ingresado no es válido.");
+                return;
+            }
+
+            if (!Int32.TryParse(valor2, out int v2))
+            {
+                await ReplyAsync("El segundo valor ingresado no es válido.");
+                return;
+            }
+
+
+            try
+            {
+                List<Cliente> cl = fac.BuscarClientesPorVentaEntre(v1, v2);
+                if (cl.Count == 0)
+                {
+                    await ReplyAsync("No se han encontrado clientes.");
+                    return;
+                }
+
+                string respuesta = "**clientes encontrados:**\n";
+                foreach (Cliente c in cl)
+                {
+                    respuesta +=
+                        $"- **{c.Nombre} {c.Apellido}** | Email: `{c.Email}` | Telefono: `{c.Telefono}` | Genero: {c.Genero}\n";
+                }
+
+                await ReplyAsync(respuesta);
+            }
+            catch (Exception e)
+            {
+                await ReplyAsync(e.Message);
+                throw;
+            }
+        }
+
+
+//comando que retorne los clientes con ventas de cierto producto o servicio
+        [Command("BuscarClientePorProducto")]
+        public async Task BuscarClientePorProducto(string nombre, string precio)
+        {
+            if (!double.TryParse(precio, out double p))
+            {
+                await ReplyAsync("El precio ingresado no es válido.");
+                return;
+            }
+
+            string resultado = "**clientes encontrados:**\n";
+            Producto pr = new Producto(nombre, p);
+            List<Cliente> cl = fac.BuscarClientesPorProducto(pr);
+
+
+            try
+            {
+                if (cl.Count == 0)
+                {
+                    await ReplyAsync("No se han encontrado clientes.");
+                    return;
+                }
+
+                foreach (Cliente c in cl)
+                {
+                    resultado +=
+                        $"- **{c.Nombre} {c.Apellido}** | Email: `{c.Email}` | Telefono: `{c.Telefono}` | Genero: {c.Genero}\n";
+                }
+
+                await ReplyAsync(resultado);
+            }
+            catch (Exception e)
+            {
+                await ReplyAsync(e.Message);
+                throw;
             }
         }
     }

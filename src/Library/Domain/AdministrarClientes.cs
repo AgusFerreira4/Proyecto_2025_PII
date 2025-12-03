@@ -14,7 +14,7 @@ namespace Library
         {
             get { return _instancia ??= new AdministrarClientes(); }
         }
-        public void CrearCliente(string nombres, string apellidos, string telefonos, string emails, string generos, DateTime fechanacimiento, Usuario usuarioasignados )
+        public void CrearCliente(string nombres, string apellidos, string telefonos, string emails, string generos, DateTime fechanacimiento, Usuario usuarioasignados)
         {
             try
             {
@@ -99,8 +99,7 @@ namespace Library
 
             throw new KeyNotFoundException("No se encontró ningún cliente con ese criterio.");
         }
-
-            
         }
+ 
 }
     
